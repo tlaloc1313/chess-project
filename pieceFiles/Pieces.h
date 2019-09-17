@@ -1,3 +1,6 @@
+/* Header file for all pieces */
+
+// Superclass
 class Piece {
 private:
 
@@ -6,9 +9,15 @@ public:
   int location;
   int isWhite;
   int isActive;
+  int hasMoved;
   Piece (int startingSquare);
-  virtual move();
-  int getTaken();
+  virtual void move();
+  int beTaken();
   int getPosition();
   virtual ~Piece ();
+};
+
+class Bishop = public Piece {
+public:
+  void move();
 };
