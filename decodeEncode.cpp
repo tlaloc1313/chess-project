@@ -4,7 +4,6 @@
 using std::cout;
 using std::cin;
 using std::string;
-using std::stoi;
 
 //Takes input from cin and encodes to number from 0-63.
 //"a1" returns 0, "a2" returns 1,..., "h8" returns 63.
@@ -17,6 +16,13 @@ int inputFunc(void) {
 	//Loops until a valid input is entered
 	while (invInput) {
 		cin >> input;
+
+		//Checks that the input is the correct length
+		if (!(input.length() == 2)) {
+			cout << "Invalid square, try again:\n";
+			invInput = true;
+			continue;
+		}
 
 		//Sets the starting number based on the column
 	  char letter = input[0];
@@ -53,23 +59,53 @@ int inputFunc(void) {
 				square = 56;
 				invInput = false;
 				break;
+			//Returns to start of loop if invalid input
 			default:
 				cout << "Invalid square, try again:\n";
 				invInput = true;
 				continue;
 	  }
 
-		//Adds the remainder based on the row
+		//Adds on the row
 		char number = input[1];
-		string numStr(&number);
-		int numInt = stoi(numStr,nullptr);
-		if (numInt >= 1 && numInt <= 8) {
-			square =+ numInt - 1;
-			invInput = false;
-		} else {
-			cout << "Invalid square, try again:\n";
-			invInput = true;
-		}
+	  switch (number) {
+		  case '1':
+				square += 0;
+				invInput = false;
+				break;
+			case '2':
+				square += 1;
+				invInput = false;
+				break;
+			case '3':
+				square += 2;
+				invInput = false;
+				break;
+			case '4':
+				square += 3;
+				invInput = false;
+				break;
+			case '5':
+				square += 4;
+				invInput = false;
+				break;
+			case '6':
+				square += 5;
+				invInput = false;
+				break;
+			case '7':
+				square += 6;
+				invInput = false;
+				break;
+			case '8':
+				square += 7;
+				invInput = false;
+				break;
+			//Returns to start of loop if invalid input
+			default:
+				cout << "Invalid square, try again:\n";
+				invInput = true;
+	  }
 	}
 
   return square;
