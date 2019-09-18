@@ -1,9 +1,11 @@
 #include "Board.h"
 
+//Basic constructor, needs no arguments
 Board::Board(){
   activeArray = {};
 };
 
+//Checks if a space on the board is occupied
 bool Board::spaceOccupied(int space){
   if (activeArray[space] == 0){
     return 0;
@@ -11,14 +13,18 @@ bool Board::spaceOccupied(int space){
   return 1;
 }
 
+//See Board.h for description.
 int Board::movePiece(int startSpace, int endSpace){
-  if (activeArray[startSpace] == 0){ //Check a piece is at StartSpace
+  if (activeArray[startSpace] == 0){ //Check a piece exists at StartSpace
     return -2;
   }
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
   success = pieceArray.move(endSpace);
   if (success == 1){
-    activeArray[startSpace] = 0;
+    activeArray[startSpace] = 0; //Clears the startSpace since the piece is moving
+    activeArray[endSpace] = 1; //Marks the endSpace as taken
+    pieceArray[endSpace] = pieceArray[startSpace]; //Copies the piece within the array
+    delete pieceArray[startSpace]; //Deletes the old object to save memory
 
     if (spaceWasOccupied == 1){//If a piece is being taken
       delete pieceArray[endSpace];
@@ -31,8 +37,9 @@ int Board::movePiece(int startSpace, int endSpace){
   return -1;
 }
 
+//Adds a piece to the board, given the necessary attributes. Returnss -1 on failure.
 int Board::addPiece(char type, int startSpace, int isWhite){
-  if (activeArray[startSpace] == 0){
+  if (activeArray[startSpace] == 0){ //If the space is taken
     return -1;
   }
   activearray[startSpace] = 1;
@@ -92,7 +99,7 @@ char Board::getPiece(int space){
   }
 }
 
-
+//Destructor has no specific behaviour
 Board::~Board(){
 
 }
