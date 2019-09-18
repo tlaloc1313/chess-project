@@ -7,5 +7,6 @@ using std::cin;
 
 int main(int argc, char const *argv[]) {
   /* code */
+  int testVariable = 0;
   return 0;
 }
