@@ -6,6 +6,10 @@ Piece::Piece(){
   std::cout<<"Created Piece";
 }
 
+bool Piece::move(int square){
+
+}
+
 int Piece::getPosition(){
   return location;
 }

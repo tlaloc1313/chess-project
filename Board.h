@@ -1,4 +1,4 @@
-#include "Piece.h"
+#include "Pieces.h"
 
 #ifndef BOARD_H
 #define BOARD_H
@@ -20,7 +20,7 @@ public:
   int movePiece(int startSpace, int endSpace);
 
   //Returns 1 if the piece was added, -1 if the space is taken
-  int addPiece(char type, int startSpace, bool isWhite);
+  int addPiece(char type, int startSpace, int isWhite);
   virtual ~Board ();
 };
 

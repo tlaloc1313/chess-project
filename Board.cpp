@@ -2,7 +2,10 @@
 
 //Basic constructor, needs no arguments
 Board::Board(){
-  activeArray = {};
+  activeArray;
+  for (int i=0; i<64; i++){
+    activeArray[i]=0;
+  }
 };
 
 //Checks if a space on the board is occupied
@@ -19,15 +22,15 @@ int Board::movePiece(int startSpace, int endSpace){
     return -2;
   }
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
-  success = pieceArray.move(endSpace);
+  int success = pieceArray[startSpace].move(endSpace);
   if (success == 1){
     activeArray[startSpace] = 0; //Clears the startSpace since the piece is moving
     activeArray[endSpace] = 1; //Marks the endSpace as taken
     pieceArray[endSpace] = pieceArray[startSpace]; //Copies the piece within the array
-    delete pieceArray[startSpace]; //Deletes the old object to save memory
+    delete &pieceArray[startSpace]; //Deletes the old object to save memory
 
     if (spaceWasOccupied == 1){//If a piece is being taken
-      delete pieceArray[endSpace];
+      delete &pieceArray[endSpace];
       return 2;
     }
     //If a piece is being moved
@@ -42,7 +45,7 @@ int Board::addPiece(char type, int startSpace, int isWhite){
   if (activeArray[startSpace] == 0){ //If the space is taken
     return -1;
   }
-  activearray[startSpace] = 1;
+  activeArray[startSpace] = 1;
   switch (type){
     case 'b':
       pieceArray[startSpace] = Bishop(startSpace, isWhite);

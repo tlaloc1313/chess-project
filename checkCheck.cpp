@@ -2,6 +2,7 @@
     boolean isWhiteTurn, and checks if the position has resulted
     in the previous moving player being in check.
 */
+#include "Board.h"
 
 bool checkCheck(Board position, bool isWhiteTurn) {
 

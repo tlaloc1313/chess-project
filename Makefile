@@ -2,8 +2,8 @@ CC	:= g++
 CXX := g++
 VPATH =
 
-CChess: main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
-	$(CXX) main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o CChess
+Chess++: main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
+	$(CXX) main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o Chess++.out
 
 Piece.o: Piece.cpp Pieces.h
 	$(CXX) -c Piece.cpp -o Piece.o
@@ -26,5 +26,8 @@ Queen.o: Queen.cpp Pieces.h
 Rook.o: Rook.cpp Pieces.h
 	$(CXX) -c Rook.cpp -o Rook.o
 
-Piecetest: Pawn.o Bishop.o Knight.o Piece.o piecetest.cpp decodeEncode.cpp position.cpp
-	$(CXX) piecetest.cpp position.cpp Pawn.o Piece.o Bishop.o Knight.o decodeEncode.cpp -o Piecetest.out
+Board.o: Board.cpp Board.h
+	$(CXX) -c Board.cpp -o Board.o
+
+Piecetest: Pawn.o Bishop.o Rook.o Knight.o Piece.o King.cpp piecetest.cpp decodeEncode.cpp Queen.o position.cpp
+	$(CXX) piecetest.cpp position.cpp Pawn.o Piece.o King.cpp Bishop.o Knight.o Rook.o Queen.o decodeEncode.cpp -o Piecetest.out

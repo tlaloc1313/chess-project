@@ -14,7 +14,7 @@ public:
   bool isWhite;
   bool hasMoved;
   Piece();
-  virtual bool move(int square) = 0;
+  virtual bool move(int square);
   int getPosition();
   int isActive;
   char getType();
