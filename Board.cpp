@@ -39,7 +39,16 @@ int Board::addPiece(char type, int startSpace, int isWhite){
   switch (type){
     case 'b':
       pieceArray[startSpace] = Bishop(startSpace, isWhite);
-    //Must include other cases
+    case 'n':
+      pieceArray[startSpace] = Knight(startSpace, isWhite);
+    case 'p':
+      pieceArray[startSpace] = Pawn(startSpace, isWhite);
+    case 'k':
+      pieceArray[startSpace] = King(startSpace, isWhite);
+    case 'q':
+      pieceArray[startSpace] = Queen(startSpace, isWhite);
+    case 'r':
+      pieceArray[startSpace] = Rook(startSpace, isWhite);
   }
 }
 
