@@ -1,31 +1,30 @@
-CC	:= g++
+CC	:= clang++
+CXX := clang++
 VPATH = /pieceFiles
 
-<<<<<<< HEAD
-CChess: main.cpp draw.cpp setup.cpp decodeEncode.cpp position.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
-	$(CC) main.cpp draw.cpp setup.cpp decodeEncode.cpp position.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o CChess
-=======
-Chess++: main.cpp draw.cpp checkCheck.cpp setup.cpp decodeEncode.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
-	$(CC) main.cpp draw.cpp checkCheck.cpp setup.cpp decodeEncode.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o CChess
->>>>>>> 1015a96450f272483ab7fbbd0161397e6b26416b
+CChess: main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
+	$(CXX) main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o CChess
 
 Piece.o: Piece.cpp Pieces.h
-	$(CC) -c Piece.cpp
+	$(CXX) -c Piece.cpp
 
 Bishop.o: Bishop.cpp Pieces.h
-	$(CC) -c Bishop.cpp
+	$(CXX) -c Bishop.cpp
 
 King.o: King.cpp Pieces.h
-	$(CC) -c King.cpp
+	$(CXX) -c King.cpp
 
 Knight.o: Knight.cpp Pieces.h
-	$(CC) -c Knight.cpp
+	$(CXX) -c Knight.cpp
 
 Pawn.o: Pawn.cpp Pieces.h
-	$(CC) -c Pawn.cpp
+	$(CXX) -c Pawn.cpp
 
 Queen.o: Queen.cpp Pieces.h
-	$(CC) -c Queen.cpp
+	$(CXX) -c Queen.cpp
 
 Rook.o: Rook.cpp Pieces.h
-	$(CC) -c Rook.cpp
+	$(CXX) -c Rook.cpp
+
+Piecetest: Pawn.o Bishop.o Knight.o piecetest.cpp decodeEncode.cpp
+	$(CXX) Pieces.h Pawn.cpp Bishop.cpp Knight.cpp decodeEncode.cpp piecetest.cpp -o piecetest

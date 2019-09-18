@@ -11,7 +11,7 @@ public:
   int location;
   bool isWhite;
   bool hasMoved;
-  virtual Piece (int startingSquare, int isWhite);
+  Piece (int startingSquare, int isWhite);
   virtual bool move(int square);
   int getPosition();
   char getType();
@@ -19,7 +19,7 @@ public:
   virtual ~Piece ();
 };
 
-class Bishop = public Piece {
+class Bishop : public Piece {
 public:
   Bishop(int startingSquare, int isWhite);
   bool move(int square);
@@ -27,35 +27,35 @@ public:
 };
 
 
-class King = public Piece{
+class King : public Piece{
 public:
   King(int startingSquare, int isWhite);
   bool move(int square);
   ~King();
 };
 
-class Knight = public Piece{
+class Knight : public Piece{
 public:
   Knight(int startingSquare, int isWhite);
   bool move(int square);
   ~Knight();
 };
 
-class Pawn = public Piece{
+class Pawn : public Piece{
 public:
   Pawn(int startingSquare, int isWhite);
   bool move(int square);
   ~Pawn();
 };
 
-class Queen = public Piece{
+class Queen : public Piece{
 public:
   Queen(int startingSquare, int isWhite);
   bool move(int square);
   ~Queen();
 };
 
-class Rook = public Piece{
+class Rook : public Piece{
 public:
   Rook(int startingSquare, int isWhite);
   bool move(int square);
