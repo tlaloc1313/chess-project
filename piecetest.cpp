@@ -1,4 +1,4 @@
-#include "pieceFiles/Pieces.h"
+#include "Pieces.h"
 #include <iostream>
 
 using std::cout;

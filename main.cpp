@@ -4,7 +4,7 @@ using std::cout;
 using std::cin;
 using std::string;
 
-#include "pieceFiles/Pieces.h"
+#include "Pieces.h"
 
 int main(int argc, char const *argv[]) {
   //Set first turn to white

@@ -1,4 +1,4 @@
-#include "/pieceFiles/Piece.h"
+#include "Piece.h"
 
 #ifndef BOARD_H
 #define BOARD_H
