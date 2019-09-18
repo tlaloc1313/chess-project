@@ -33,6 +33,8 @@ bool Knight::move(int square){
     return 1;
   }
 }
-
-
 //+10, +6, -6, -10, -15, -17, +15, +17
+
+Knight::~Knight(){
+
+}

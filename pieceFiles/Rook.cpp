@@ -28,3 +28,7 @@ bool Rook::move(int square){
   }
 
 }
+
+Rook::~Rook(){
+  
+}
