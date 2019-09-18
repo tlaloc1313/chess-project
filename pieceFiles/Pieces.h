@@ -7,9 +7,9 @@ private:
 public:
   char type;
   int location;
-  int isWhite;
-  int isActive;
-  int hasMoved;
+  bool isWhite;
+  bool isActive;
+  bool hasMoved;
   Piece (int startingSquare);
   virtual void move();
   int beTaken();

@@ -1,8 +1,8 @@
 CC	:= g++
 VPATH = /pieceFiles
 
-CChess: main.cpp draw.cpp setup.cpp decodeEncode.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
-	$(CC) main.cpp draw.cpp setup.cpp decodeEncode.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o CChess
+Chess++: main.cpp draw.cpp checkCheck.cpp setup.cpp decodeEncode.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
+	$(CC) main.cpp draw.cpp checkCheck.cpp setup.cpp decodeEncode.cpp checkSquareOccupied.cpp Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o CChess
 
 Piece.o: Piece.cpp Pieces.h
 	$(CC) -c Piece.cpp
