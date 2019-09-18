@@ -4,6 +4,7 @@
 using std::cout;
 using std::cin;
 using std::string;
+using std::to_string;
 
 //Takes input from cin and encodes to number from 0-63.
 //"a1" returns 0, "a2" returns 1,..., "h8" returns 63.
@@ -111,9 +112,44 @@ int inputFunc(void) {
   return square;
 }
 
+//Converts a square to chess notation
 string encode(int code){
 
+  int row = code%8; //gets an integer for the row
+  int column = (code-row)/8; //gets an integer for the column
+  string rowString = to_string(row); //Converts to a string for concatenation
+  string columnString;
 
-
-  return "";
+  //Assigns a letter based on the row
+  switch (column){
+    case 0:
+      columnString = "a";
+    break;
+    case 1:
+      columnString = "b";
+    break;
+    case 2:
+      columnString = "c";
+    break;
+    case 3:
+      columnString = "d";
+    break;
+    case 4:
+      columnString = "e";
+    break;
+    case 5:
+      columnString = "f";
+    break;
+    case 6:
+      columnString = "g";
+    break;
+    case 7:
+      columnString = "h";
+    break;
+    default:
+      return "Undefined";
+  }
+  //Concatenates the column and row
+  string output =  columnString + rowString;
+  return output;
 }
