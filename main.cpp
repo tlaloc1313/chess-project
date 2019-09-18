@@ -10,6 +10,9 @@ int main(int argc, char const *argv[]) {
   //Set first turn to white
   bool whiteTurn=1;
   int gameEnd = 0;
+  // Setup a game
+  Board* gameBoard = new Board();
+  setup(*Board);
 
   while (gameEnd == 0){
     //Display whose turn it is
