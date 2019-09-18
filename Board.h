@@ -12,6 +12,8 @@ public:
   Board ();
   bool spaceOccupied(int space);
 
+  char getPiece(int space);
+
   //Returns 2 if a piece is taken, 1 if the piece is moved, -1 if the move is illegal, -2 if the piece doesn't exist
   int movePiece(int startSpace, int endSpace);
 

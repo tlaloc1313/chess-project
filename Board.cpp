@@ -52,6 +52,47 @@ int Board::addPiece(char type, int startSpace, int isWhite){
   }
 }
 
+//Gets the unicode chess piece for a given square
+char Board::getPiece(int space){
+  char type = pieceArray[space].getType();
+  bool isWhite = pieceArray[space].getIsWhite();
+
+  if (isWhite == 1){
+    //White Pieces
+    switch (type) {
+      case 'p':
+      return '\u2659';
+      case 'r':
+      return '\u2656';
+      case 'b':
+      return '\u2657';
+      case 'n':
+      return '\u2658';
+      case 'k':
+      return '\u2654';
+      case 'q':
+      return '\u2655';
+    }
+  } else {
+    //Black Pieces
+    switch (type) {
+      case 'p':
+      return '\u265F';
+      case 'r':
+      return '\u265C';
+      case 'b':
+      return '\u265D';
+      case 'n':
+      return '\u265E';
+      case 'k':
+      return '\u265A';
+      case 'q':
+      return '\u265B';
+    }
+  }
+}
+
+
 Board::~Board(){
 
 }

@@ -16,6 +16,8 @@ public:
   virtual void move(int square);
   int beTaken();
   int getPosition();
+  int getType();
+  int getIsWhite();
   virtual ~Piece ();
 };
 
