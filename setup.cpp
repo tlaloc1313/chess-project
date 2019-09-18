@@ -1,5 +1,7 @@
 #include "Board.h"
 
+//Uses behaviour of the Board class to setup a standard
+//game of chess on the given gameBoard 
 int setup(Board gameBoard) {
   //White Pawns
   gameboard.addPiece('p', 1, 1);
