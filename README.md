@@ -1,4 +1,6 @@
-# chess-project
-So yeah, this is the project.
-Not much to read about.
-Except for me.
+# Chess++
+
+Developed by:
+  Tristan Hall
+  Lachlan Wood
+  James Edwards
