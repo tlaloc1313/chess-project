@@ -15,7 +15,7 @@ public:
   //Returns 2 if a piece is taken, 1 if the piece is moved, -1 if the move is illegal, -2 if the piece doesn't exist
   int movePiece(int startSpace, int endSpace);
 
-  //Returns 1 if the piece was added, 0 if the space is taken
+  //Returns 1 if the piece was added, -1 if the space is taken
   int addPiece(int type, int startSpace);
   virtual ~Board ();
 };
