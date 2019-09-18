@@ -3,7 +3,7 @@
 #include <cmath>
 
 Piece::Piece(){
-  std::cout<<"Created Piece";
+  std::cout<<"Created Piece\n";
 }
 
 bool Piece::move(int square){

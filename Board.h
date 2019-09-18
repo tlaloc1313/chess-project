@@ -7,7 +7,7 @@
 //movement of pieces and creation/deletion of piece objects.
 class Board {
 private:
-  Piece pieceArray[64]; //Array of pieces corresponding to squares
+  Piece* pieceArray[64]; //Array of pieces corresponding to squares
   bool activeArray[64]; //Tracks if a square has a piece
 
 public:

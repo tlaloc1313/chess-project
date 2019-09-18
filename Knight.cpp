@@ -8,7 +8,6 @@ Knight::Knight(int startingSquare, int pieceIsWhite){
   isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
-  std::cout<<"A knight";
 }
 
 bool Knight::move(int square){

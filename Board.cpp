@@ -1,4 +1,5 @@
 #include "Board.h"
+#include <iostream>
 
 //Basic constructor, needs no arguments
 Board::Board(){
@@ -22,15 +23,14 @@ int Board::movePiece(int startSpace, int endSpace){
     return -2;
   }
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
-  int success = pieceArray[startSpace].move(endSpace);
+  int success = pieceArray[startSpace]->move(endSpace);
   if (success == 1){
     activeArray[startSpace] = 0; //Clears the startSpace since the piece is moving
     activeArray[endSpace] = 1; //Marks the endSpace as taken
-    pieceArray[endSpace] = pieceArray[startSpace]; //Copies the piece within the array
-    delete &pieceArray[startSpace]; //Deletes the old object to save memory
+    pieceArray[endSpace] = pieceArray[startSpace]; //Copies the pointer to the piece within the array
 
     if (spaceWasOccupied == 1){//If a piece is being taken
-      delete &pieceArray[endSpace];
+      delete pieceArray[endSpace];
       return 2;
     }
     //If a piece is being moved
@@ -42,30 +42,30 @@ int Board::movePiece(int startSpace, int endSpace){
 
 //Adds a piece to the board, given the necessary attributes. Returnss -1 on failure.
 int Board::addPiece(char type, int startSpace, int isWhite){
-  if (activeArray[startSpace] == 0){ //If the space is taken
+  if (activeArray[startSpace] == 1){ //If the space is taken
     return -1;
   }
   activeArray[startSpace] = 1;
   switch (type){
     case 'b':
-      pieceArray[startSpace] = Bishop(startSpace, isWhite);
+      pieceArray[startSpace] = new Bishop(startSpace, isWhite);
     case 'n':
-      pieceArray[startSpace] = Knight(startSpace, isWhite);
+      pieceArray[startSpace] = new Knight(startSpace, isWhite);
     case 'p':
-      pieceArray[startSpace] = Pawn(startSpace, isWhite);
+      pieceArray[startSpace] = new Pawn(startSpace, isWhite);
     case 'k':
-      pieceArray[startSpace] = King(startSpace, isWhite);
+      pieceArray[startSpace] = new King(startSpace, isWhite);
     case 'q':
-      pieceArray[startSpace] = Queen(startSpace, isWhite);
+      pieceArray[startSpace] = new Queen(startSpace, isWhite);
     case 'r':
-      pieceArray[startSpace] = Rook(startSpace, isWhite);
+      pieceArray[startSpace] = new Rook(startSpace, isWhite);
   }
 }
 
 //Gets the unicode chess piece for a given square
 char Board::getPiece(int space){
-  char type = pieceArray[space].getType();
-  bool isWhite = pieceArray[space].getIsWhite();
+  char type = pieceArray[space]->getType();
+  bool isWhite = pieceArray[space]->getIsWhite();
 
   if (isWhite == 1){
     //White Pieces

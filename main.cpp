@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]) {
       cout << "White to move:\n";
     }
     else{
-      "Black to move:\n";
+      cout<<"Black to move:\n";
     }
 
     cout << "From: ";
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[]) {
     int endPos = inputFunc();
 
 
-    whiteTurn++;
+    whiteTurn= !whiteTurn;
   }
   return 0;
 }
