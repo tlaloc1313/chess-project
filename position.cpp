@@ -1,13 +1,15 @@
+#include <cmath>
+
 int row(int location) {
 
-  int row = position%8;
+  int row = location%8;
 
   return row;
 }
 
 
 int col(int location) {
-  double a = position/8;
+  double a = location/8;
 
   int col = floor(a);
 

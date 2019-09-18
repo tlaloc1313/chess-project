@@ -2,7 +2,7 @@
 
 Queen::Queen(int startingSquare, int pieceIsWhite){
   location = startingSquare;
-  type = "Queen";
+  pieceType = 'q';
   isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;

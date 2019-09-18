@@ -1,8 +1,9 @@
 #include "Pieces.h"
+#include <cmath>
 
 Bishop::Bishop(int startingSquare, int pieceIsWhite){
   location = startingSquare;
-  type = "Bishop";
+  pieceType = 'b';
   isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;

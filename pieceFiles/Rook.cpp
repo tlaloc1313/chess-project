@@ -3,7 +3,7 @@
 
 Rook::Rook(int startingSquare, int pieceIsWhite){
   location = startingSquare;
-  type = "Rook";
+  pieceType = 'r';
   isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
@@ -30,5 +30,5 @@ bool Rook::move(int square){
 }
 
 Rook::~Rook(){
-  
+
 }

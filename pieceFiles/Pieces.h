@@ -2,21 +2,24 @@
 #ifndef PIECES_H
 #define PIECES_H
 
+extern int col(int location);
+extern int row(int location);
 // Superclass
 class Piece {
 private:
 
 public:
-  char type;
+  char pieceType;
   int location;
   bool isWhite;
   bool hasMoved;
-  Piece (int startingSquare, int isWhite);
-  virtual bool move(int square);
+  Piece();
+  virtual bool move(int square) = 0;
   int getPosition();
+  int isActive;
   char getType();
   bool getIsWhite();
-  virtual ~Piece ();
+  ~Piece ();
 };
 
 class Bishop : public Piece {

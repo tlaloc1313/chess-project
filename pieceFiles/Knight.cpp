@@ -1,8 +1,9 @@
 #include "Pieces.h"
+#include <cmath>
 
 Knight::Knight(int startingSquare, int pieceIsWhite){
   location = startingSquare;
-  type = "Knight";
+  pieceType = 'n';
   isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
@@ -10,7 +11,7 @@ Knight::Knight(int startingSquare, int pieceIsWhite){
 
 bool Knight::move(int square){
   int currentPos = location;
-  int dist = abs(currentPos - square)
+  int dist = abs(currentPos - square);
 
   //Check move is legal
   if (dist == 6 || dist == 10 || dist == 15 || dist == 17){

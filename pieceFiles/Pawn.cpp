@@ -1,8 +1,9 @@
 #include "Pieces.h"
+#include <cmath>
 
 Pawn::Pawn(int startingSquare, int pieceIsWhite){
   location = startingSquare;
-  type = "Pawn";
+  pieceType = 'p';
   isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
@@ -30,7 +31,7 @@ bool Pawn::move(int square){
         }
         break;
       case 1:
-        if ( (toRow-fromRow)=1){
+        if ( (toRow-fromRow)==1){
           return 1;
         }
     }

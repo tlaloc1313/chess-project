@@ -2,7 +2,7 @@
 
 King::King(int startingSquare, int pieceIsWhite){
   location = startingSquare;
-  type = "King";
+  pieceType = 'k';
   isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
