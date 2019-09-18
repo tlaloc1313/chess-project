@@ -8,9 +8,13 @@ using std::string;
 //Takes input from cin and encodes to number from 0-63.
 int inputFunc(void) {
   string input;
+  int square;
+
   cin >> input;
+  
   switch (input) {
-    case :
+    case "a1":
+
   }
   return 0;
 }
