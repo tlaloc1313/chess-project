@@ -4,7 +4,6 @@
 Pawn::Pawn(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'p';
-  isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
 }

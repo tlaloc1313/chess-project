@@ -4,7 +4,6 @@
 Rook::Rook(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'r';
-  isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
 }

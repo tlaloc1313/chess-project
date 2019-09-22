@@ -3,7 +3,6 @@
 Queen::Queen(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'q';
-  isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
 }

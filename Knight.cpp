@@ -5,7 +5,6 @@
 Knight::Knight(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'n';
-  isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
 }

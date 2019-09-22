@@ -4,7 +4,6 @@
 Bishop::Bishop(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'b';
-  isActive = 1;
   isWhite = pieceIsWhite;
   hasMoved = 0;
 }
