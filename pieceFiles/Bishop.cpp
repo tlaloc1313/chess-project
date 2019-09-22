@@ -1,5 +1,5 @@
 #include "Pieces.h"
-#include <math.h>
+#include <cmath>
 
 Bishop::Bishop(int startingSquare, int pieceIsWhite){
   location = startingSquare;
