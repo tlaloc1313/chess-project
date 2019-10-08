@@ -49,21 +49,27 @@ int Board::addPiece(char type, int startSpace, int isWhite){
   switch (type){
     case 'b':
       pieceArray[startSpace] = new Bishop(startSpace, isWhite);
+      break;
     case 'n':
       pieceArray[startSpace] = new Knight(startSpace, isWhite);
+      break;
     case 'p':
       pieceArray[startSpace] = new Pawn(startSpace, isWhite);
+      break;
     case 'k':
       pieceArray[startSpace] = new King(startSpace, isWhite);
+      break;
     case 'q':
       pieceArray[startSpace] = new Queen(startSpace, isWhite);
+      break;
     case 'r':
       pieceArray[startSpace] = new Rook(startSpace, isWhite);
+      break;
   }
 }
 
 //Gets the unicode chess piece for a given square
-char Board::getPiece(int space){
+const char* Board::getPiece(int space){
   char type = pieceArray[space]->getType();
   bool isWhite = pieceArray[space]->getIsWhite();
 
@@ -71,33 +77,33 @@ char Board::getPiece(int space){
     //White Pieces
     switch (type) {
       case 'p':
-      return '\u2659';
+      return u8"\u2659";
       case 'r':
-      return '\u2656';
+      return u8"\u2656";
       case 'b':
-      return '\u2657';
+      return u8"\u2657";
       case 'n':
-      return '\u2658';
+      return u8"\u2658";
       case 'k':
-      return '\u2654';
+      return u8"♔";
       case 'q':
-      return '\u2655';
+      return u8"\u2655";
     }
   } else {
     //Black Pieces
     switch (type) {
       case 'p':
-      return '\u265F';
+      return u8"\u265F";
       case 'r':
-      return '\u265C';
+      return u8"\u265C";
       case 'b':
-      return '\u265D';
+      return u8"\u265D";
       case 'n':
-      return '\u265E';
+      return u8"\u265E";
       case 'k':
-      return '\u265A';
+      return u8"\u265A";
       case 'q':
-      return '\u265B';
+      return u8"\u265B";
     }
   }
 }

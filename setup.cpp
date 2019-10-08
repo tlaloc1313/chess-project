@@ -30,10 +30,10 @@ int setup(Board* gameBoard) {
   gameBoard->addPiece('r', 63, 0);
 
   //Bishops
-  gameBoard->addPiece('n', 16, 1);
-  gameBoard->addPiece('n', 40, 1);
-  gameBoard->addPiece('n', 23, 0);
-  gameBoard->addPiece('n', 47, 0);
+  gameBoard->addPiece('b', 16, 1);
+  gameBoard->addPiece('b', 40, 1);
+  gameBoard->addPiece('b', 23, 0);
+  gameBoard->addPiece('b', 47, 0);
 
   //Knights - note 'n' as type
   gameBoard->addPiece('n', 8, 1);

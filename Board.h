@@ -13,7 +13,7 @@ private:
 public:
   Board ();
   bool spaceOccupied(int space); //Checks if a square is occupied
-  char getPiece(int space); //Returns what type of piece is at a square
+  const char* getPiece(int space); //Returns what type of piece is at a square
 
   //Returns 2 if a piece is taken, 1 if the piece is moved,
   //-1 if the move is illegal, -2 if the piece doesn't exist

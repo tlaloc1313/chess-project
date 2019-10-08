@@ -9,6 +9,7 @@ using std::string;
 
 extern int setup(Board* gameBoard);
 extern int inputFunc();
+extern int draw(Board* gameBoard);
 
 int main(int argc, char const *argv[]) {
   //Set first turn to white
@@ -19,6 +20,8 @@ int main(int argc, char const *argv[]) {
   setup(gameBoard);
 
   while (gameEnd == 0){
+    draw(gameBoard);
+
     //Display whose turn it is
     if (whiteTurn==1){
       cout << "White to move:\n";

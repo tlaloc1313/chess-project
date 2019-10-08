@@ -1,10 +1,11 @@
 #include <iostream>
 using std::cout;
 using std::cin;
+using std::wcout;
 
 #include "Board.h"
 
-int draw(Board gameBoard) {
+int draw(Board* gameBoard) {
   int currentSquare;
 
   for (int n=0; n<10; n++){
@@ -13,17 +14,27 @@ int draw(Board gameBoard) {
 
   for (int row=7; row>=0; row--){
 
+    cout<<row+1<<"   ";
+
     for (int column=0; column<8; column++){
+
       currentSquare = (column*8) + row;
 
       //Where the square is occupied
-      if (gameBoard.spaceOccupied(currentSquare) == 1){
-        cout<<gameBoard.getPiece(currentSquare)<<" ";
+      if (gameBoard->spaceOccupied(currentSquare) == 1){
+        cout<<gameBoard->getPiece(currentSquare)<<"   ";
       } else { //Where the square is unoccupied
-        cout<<"#"<<" ";
+        if ((column+row)%2 == 0){
+          cout<<"#"<<"   ";
+        } else {
+          cout<<" "<<"   ";
+        }
       }
     }
-    cout<<"\n";
+    cout<<"\n\n";
   }
+
+  cout<<"    a   b   c   d   e   f   g   h \n";
+
 return 0;
 }
