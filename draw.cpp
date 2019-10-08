@@ -5,6 +5,14 @@ using std::wcout;
 
 #include "Board.h"
 
+void drawMoves(Board* gameBoard){
+  cout<< "Moves: \n";
+  for (int i = 0; i < gameBoard->getMoveNumber(); i++){
+    cout << gameBoard->getPastPiece(i) << gameBoard->getPastSquare(i) << "  ";
+  }
+  cout << "\n\n";
+}
+
 int draw(Board* gameBoard) {
   int currentSquare;
 
@@ -34,7 +42,9 @@ int draw(Board* gameBoard) {
     cout<<"\n\n";
   }
 
-  cout<<"    a   b   c   d   e   f   g   h \n";
+  cout<<"    a   b   c   d   e   f   g   h \n\n";
+
+  drawMoves(gameBoard);
 
 return 0;
 }

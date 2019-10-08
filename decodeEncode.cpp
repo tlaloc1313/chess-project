@@ -117,7 +117,7 @@ string encode(int code){
 
   int row = code%8; //gets an integer for the row
   int column = (code-row)/8; //gets an integer for the column
-  string rowString = to_string(row); //Converts to a string for concatenation
+  string rowString = to_string(row+1); //Converts to a string for concatenation
   string columnString;
 
   //Assigns a letter based on the row

@@ -1,12 +1,15 @@
 #include "Board.h"
 #include <iostream>
 
+extern std::string encode(int code);
+
 //Basic constructor, needs no arguments
 Board::Board(){
   activeArray;
   for (int i=0; i<64; i++){
     activeArray[i]=0;
   }
+  moveNumber = 0;
 };
 
 //Checks if a space on the board is occupied
@@ -45,6 +48,9 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     pieceArray[endSpace] = pieceArray[startSpace]; //Copies the pointer to the piece within the array
 
     //If a piece is being moved
+    pastPieces[moveNumber] = pieceArray[endSpace]->getType();
+    pastMoves[moveNumber] = endSpace;
+    moveNumber++;
     return 1;
   }
   //If the move was illegal
@@ -117,6 +123,31 @@ const char* Board::getPiece(int space){
       return u8"\u265B";
     }
   }
+}
+
+const char* Board::getPastPiece(int number){
+  switch (pastPieces[number]) {
+    case 'p':
+    return u8"\u2659";
+    case 'r':
+    return u8"\u2656";
+    case 'b':
+    return u8"\u2657";
+    case 'n':
+    return u8"\u2658";
+    case 'k':
+    return u8"♔";
+    case 'q':
+    return u8"\u2655";
+  }
+}
+
+std::string Board::getPastSquare(int number){
+  return encode(pastMoves[number]);
+}
+
+int Board::getMoveNumber(){
+  return moveNumber;
 }
 
 //Destructor has no specific behaviour
