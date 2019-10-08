@@ -1,5 +1,6 @@
 #include "Pieces.h"
 #include <cmath>
+#include <iostream>
 
 //Constructor
 Pawn::Pawn(int startingSquare, int pieceIsWhite){
@@ -15,7 +16,6 @@ bool Pawn::checkPath(int destination, bool activeArray[64]){
 
 //This function checks that a given move is legal
 bool Pawn::move(int square, bool activeArray[64]){
-
   //Can't move to same square
   if (square == location){
     return 0;

@@ -23,10 +23,11 @@ int Board::movePiece(int startSpace, int endSpace){
     return -2;
   }
   //It is illegal to take your own pieces:
-  if (pieceArray[endSpace]->getIsWhite() == pieceArray[startSpace]->getIsWhite() && activeArray[endSpace]==1){
-    return -1;
+  if ((activeArray[endSpace]==1)) {
+    if ((pieceArray[endSpace]->getIsWhite() == pieceArray[startSpace]->getIsWhite())){
+      return -1;
+    }
   }
-
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
   int success = pieceArray[startSpace]->move(endSpace, activeArray);
   if (success == 1){
