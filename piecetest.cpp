@@ -7,7 +7,7 @@ using std::cin;
 extern int inputFunc();
 
 int main(int argc, char const *argv[]) {
-  bool activeArray[64]={1};
+  bool activeArray[64]={};
   cout<<"Making a Bishop. What square? ";
   Bishop b1 = Bishop(inputFunc(), 1);
   cout<<"Where to move it?";
@@ -16,8 +16,8 @@ int main(int argc, char const *argv[]) {
   Knight b2 = Knight(inputFunc(), 1);
   cout<<"Where to move it?";
   cout<<b2.move(inputFunc(), activeArray)<<"\n";
-  cout<<"Making a White Pawn. a3 is taken. What Square?";
-  activeArray[2]=1;
+  cout<<"Making a White Pawn. c3 is taken. What Square?";
+  activeArray[18]=1;
   Pawn b3 = Pawn(inputFunc(), 1);
   cout<<"Where to move it?";
   cout<<b3.move(inputFunc(), activeArray)<<"\n";

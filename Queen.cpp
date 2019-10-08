@@ -7,6 +7,10 @@ Queen::Queen(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
+bool Queen::checkPath(int destination, bool activeArray[64]){
+	return 0;
+}
+
 bool Queen::move(int square, bool activeArray[64]){
 
 }

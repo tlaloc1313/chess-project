@@ -6,20 +6,39 @@ Piece::Piece(){
   std::cout<<"Created Piece\n";
 }
 
-/*
-int Piece::dir(int destination){
-	int direction;
+//Returns the direction the piece will move in from 0-7, anticlockwise from the positive horizontal
+int Piece::direction(int destination){
+	int dir;
+	
 	if (col(location) < col(destination)) {
-		direction = 0;
-	} else if (row(location) < row(destination)) {
-		direction = 2;
+		if (row(location) < row(destination)) {
+			dir = 1;
+		} else if (row(location) > row(destination)) {
+			dir = 7;
+		} else {
+			dir = 0;
+		}
 	} else if (col(location) > col(destination)) {
-		destination = 4;
-	} else if (row(location) > row(destination)){
-		destination = 6;
+		if (row(location) < row(destination)) {
+			dir = 3;
+		} else if (row(location) > row(destination)) {
+			dir = 5;
+		} else {
+			dir = 4;
+		}
+	} else {
+		if (row(location) < row(destination)) {
+			dir = 2;
+		} else {
+			dir = 6;
+		}
 	}
+	return dir;
 }
-*/
+
+bool Piece::checkPath(int destination, bool activeArray[64]){
+
+}
 
 bool Piece::move(int square, bool activeArray[64]){
 

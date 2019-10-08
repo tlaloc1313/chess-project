@@ -1,5 +1,5 @@
 CC	:= g++
-CXX := g++ -std=c++11
+CXX := g++ -std=c++11 -no-pie
 VPATH =
 
 Chess++: main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o

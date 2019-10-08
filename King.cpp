@@ -7,6 +7,10 @@ King::King(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
+bool King::checkPath(int destination, bool activeArray[64]){
+	return 0;
+}
+
 bool King::move(int square, bool activeArray[64]){
   int fromRow = row(location);
   int fromCol = col(location);
