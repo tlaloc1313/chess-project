@@ -1,11 +1,15 @@
 #include "Pieces.h"
-
+#include "position.cpp"
 
 Rook::Rook(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'r';
   isWhite = pieceIsWhite;
   hasMoved = 0;
+}
+
+bool Rook::checkPath(int destination){
+	int direction = dir(destination);
 }
 
 bool Rook::move(int square){
