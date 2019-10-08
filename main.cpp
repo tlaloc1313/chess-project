@@ -30,11 +30,17 @@ int main(int argc, char const *argv[]) {
       cout<<"Black to move:\n";
     }
 
-    cout << "From: ";
-    int startPos = inputFunc();
-    cout << "To: ";
-    int endPos = inputFunc();
+    int success = 0;
 
+    while (success !=1){
+
+      cout << "From: ";
+      int startPos = inputFunc();
+      cout << "To: ";
+      int endPos = inputFunc();
+
+      success = gameBoard->movePiece(startPos, endPos);
+    }
 
     whiteTurn= !whiteTurn;
   }

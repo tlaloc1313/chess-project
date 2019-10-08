@@ -22,17 +22,21 @@ int Board::movePiece(int startSpace, int endSpace){
   if (activeArray[startSpace] == 0){ //Check a piece exists at StartSpace
     return -2;
   }
+  //It is illegal to take your own pieces:
+  if (pieceArray[endSpace]->getIsWhite() == pieceArray[startSpace]->getIsWhite() && activeArray[endSpace]==1){
+    return -1;
+  }
+
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
   int success = pieceArray[startSpace]->move(endSpace, activeArray);
   if (success == 1){
+    if (spaceWasOccupied == 1){//If a piece is being taken
+      delete pieceArray[endSpace];
+    }
     activeArray[startSpace] = 0; //Clears the startSpace since the piece is moving
     activeArray[endSpace] = 1; //Marks the endSpace as taken
     pieceArray[endSpace] = pieceArray[startSpace]; //Copies the pointer to the piece within the array
 
-    if (spaceWasOccupied == 1){//If a piece is being taken
-      delete pieceArray[endSpace];
-      return 2;
-    }
     //If a piece is being moved
     return 1;
   }
@@ -40,7 +44,7 @@ int Board::movePiece(int startSpace, int endSpace){
   return -1;
 }
 
-//Adds a piece to the board, given the necessary attributes. Returnss -1 on failure.
+//Adds a piece to the board, given the necessary attributes. Returns -1 on failure.
 int Board::addPiece(char type, int startSpace, int isWhite){
   if (activeArray[startSpace] == 1){ //If the space is taken
     return -1;
