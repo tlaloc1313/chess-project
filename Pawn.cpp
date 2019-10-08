@@ -37,14 +37,20 @@ bool Pawn::move(int square, bool activeArray[64]){
       //Move up to two squares forward if first move for the piece
       switch (hasMoved){
         case 0:
-          if ( ((toRow-fromRow)==1)||((toRow-fromRow)==2) ){
+          if ((toRow-fromRow)==2){
             if (activeArray[square-1]==0){ //Checks that intermediate square is empty
+              location = square;
               return 1;
             }
+          }
+          if ((toRow-fromRow)==1){
+            location = square;
+            return 1;
           }
           break;
         case 1:
           if ( (toRow-fromRow)==1){
+            location = square;
             return 1;
           }
       }
@@ -54,14 +60,20 @@ bool Pawn::move(int square, bool activeArray[64]){
       //Move up to two if first move for the piece
       switch (hasMoved){
         case 0:
-          if ( ((toRow-fromRow)==-1)||((toRow-fromRow)==-2) ){
+          if ((toRow-fromRow)==-2){
             if (activeArray[square+1]==0){ //Checks that intermediate square is empty
+              location = square;
               return 1;
             }
+          }
+          if ((toRow-fromRow)==-1){
+            location = square;
+            return 1;
           }
           break;
         case 1:
           if ( (toRow-fromRow)==-1){
+            location = square;
             return 1;
           }
       }
@@ -72,12 +84,13 @@ bool Pawn::move(int square, bool activeArray[64]){
   if (abs(fromCol-toCol)==1 && activeArray[square]==1){
     switch (isWhite){
       case 1:
-      if ((toRow-fromRow)==1){ //Checks for a diagonal move forwards
+      if (toRow-fromRow==1){ //Checks for a diagonal move forwards
+        location = square;
         return 1;
       }
-
       case 0:
-      if ( (toRow-fromRow)==-1 ){ //Checks for a diagonal move backwards
+      if ( toRow-fromRow==-1 ){ //Checks for a diagonal move backwards
+        location = square;
         return 1;
       }
     }

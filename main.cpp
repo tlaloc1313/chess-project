@@ -39,9 +39,12 @@ int main(int argc, char const *argv[]) {
       cout << "To: ";
       int endPos = inputFunc();
 
-      success = gameBoard->movePiece(startPos, endPos);
-    }
+      success = gameBoard->movePiece(startPos, endPos, whiteTurn);
 
+      if (success != 1){
+        std::cout << "Invalid Move" << '\n';
+      }
+    }
     whiteTurn= !whiteTurn;
   }
   return 0;

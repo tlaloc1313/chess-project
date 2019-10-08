@@ -17,7 +17,7 @@ public:
 
   //Returns 2 if a piece is taken, 1 if the piece is moved,
   //-1 if the move is illegal, -2 if the piece doesn't exist
-  int movePiece(int startSpace, int endSpace);
+  int movePiece(int startSpace, int endSpace, int whiteTurn);
 
   //Returns 1 if the piece was added, -1 if the space is taken
   int addPiece(char type, int startSpace, int isWhite);
