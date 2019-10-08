@@ -6,6 +6,7 @@
 
 extern int col(int location);
 extern int row(int location);
+
 // Superclass
 class Piece {
 private:
@@ -16,6 +17,8 @@ public:
   bool isWhite;
   bool hasMoved;
   Piece();
+	int dir(int destination);
+	// virtual bool checkPath(int destination);
   virtual bool move(int square, bool activeArray[64]);
   int getPosition();
   int isActive;
@@ -63,6 +66,7 @@ public:
 class Rook : public Piece{
 public:
   Rook(int startingSquare, int isWhite);
+	// bool checkPath(int destination);
   bool move(int square, bool activeArray[64]);
   ~Rook();
 };

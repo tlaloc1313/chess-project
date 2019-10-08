@@ -6,6 +6,21 @@ Piece::Piece(){
   std::cout<<"Created Piece\n";
 }
 
+/*
+int Piece::dir(int destination){
+	int direction;
+	if (col(location) < col(destination)) {
+		direction = 0;
+	} else if (row(location) < row(destination)) {
+		direction = 2;
+	} else if (col(location) > col(destination)) {
+		destination = 4;
+	} else if (row(location) > row(destination)){
+		destination = 6;
+	}
+}
+*/
+
 bool Piece::move(int square, bool activeArray[64]){
 
 }

@@ -8,6 +8,10 @@ Rook::Rook(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
+//bool Rook::checkPath(int destination){
+//	int direction = dir(destination);
+//}
+
 bool Rook::move(int square, bool activeArray[64]){
   int currentLocation = location;
   //Illegal if moving to current position
