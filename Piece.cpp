@@ -6,7 +6,7 @@ Piece::Piece(){
   std::cout<<"Created Piece\n";
 }
 
-bool Piece::move(int square){
+bool Piece::move(int square, bool activeArray[64]){
 
 }
 

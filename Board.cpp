@@ -23,7 +23,7 @@ int Board::movePiece(int startSpace, int endSpace){
     return -2;
   }
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
-  int success = pieceArray[startSpace]->move(endSpace);
+  int success = pieceArray[startSpace]->move(endSpace, activeArray);
   if (success == 1){
     activeArray[startSpace] = 0; //Clears the startSpace since the piece is moving
     activeArray[endSpace] = 1; //Marks the endSpace as taken

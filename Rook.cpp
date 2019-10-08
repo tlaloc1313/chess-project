@@ -8,7 +8,7 @@ Rook::Rook(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
-bool Rook::move(int square){
+bool Rook::move(int square, bool activeArray[64]){
   int currentLocation = location;
   //Illegal if moving to current position
   if (currentLocation == square){

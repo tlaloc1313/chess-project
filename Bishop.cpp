@@ -8,7 +8,7 @@ Bishop::Bishop(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
-bool Bishop::move(int square){
+bool Bishop::move(int square, bool activeArray[64]){
   int fromRow = row(location);
   int fromCol = col(location);
   int toRow = row(square);

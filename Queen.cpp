@@ -7,7 +7,7 @@ Queen::Queen(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
-bool Queen::move(int square){
+bool Queen::move(int square, bool activeArray[64]){
 
 }
 
