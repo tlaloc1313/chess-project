@@ -31,7 +31,7 @@ bool Knight::move(int square, bool activeArray[64]){
 
     //Move piece and return 1
     location = square;
-    hasMoves = 1;
+    hasMoved = 1;
     return 1;
   }
 	return 0;
