@@ -3,6 +3,7 @@
 #define PIECES_H
 
 #include <cmath>
+using std::abs;
 
 extern int col(int location);
 extern int row(int location);

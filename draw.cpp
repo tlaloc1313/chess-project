@@ -25,7 +25,6 @@ int draw(Board* gameBoard) {
     cout<<row+1<<"   ";
 
     for (int column=0; column<8; column++){
-
       currentSquare = (column*8) + row;
 
       //Where the square is occupied
