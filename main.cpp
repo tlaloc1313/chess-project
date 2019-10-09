@@ -4,7 +4,6 @@ using std::cout;
 using std::cin;
 using std::string;
 
-#include "Pieces.h"
 #include "Board.h"
 
 extern int setup(Board* gameBoard);
@@ -12,6 +11,14 @@ extern int inputFunc();
 extern int draw(Board* gameBoard);
 
 int main(int argc, char const *argv[]) {
+
+  for (int i = 0; i < 10; i++) {
+    cout<<"\n\n\n\n\n\n\n\n\n\n";
+  }
+
+  cout<<"Welcome to Chess++, a chess interface developed in C++11.\nPress Enter/Return to continue...";
+  cin.get();
+
   //Set first turn to white
   bool whiteTurn=1;
   int gameEnd = 0;
