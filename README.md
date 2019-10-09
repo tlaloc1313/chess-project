@@ -9,4 +9,5 @@ Chess++ is a simple chess interface, designed to allow two players to have a gam
   - Command-line move entry based on starting and ending square.
   - A live display of the chess board.
   - Move validation based on all rules of Chess.
-  - A display of past moves, using correct notation
+  - A display of past moves, using correct notation.
+  - A chess clock.

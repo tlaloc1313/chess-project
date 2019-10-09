@@ -1,6 +1,5 @@
 CC	:= g++
-CXX := g++ -std=c++11 -no-pie
-VPATH =
+CXX := g++ -std=c++11 -Wall
 
 Chess++: main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
 	$(CXX) main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o Chess++.out
