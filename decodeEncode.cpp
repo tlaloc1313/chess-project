@@ -150,6 +150,6 @@ string encode(int code){
       return "Undefined";
   }
   //Concatenates the column and row
-  string output =  columnString + rowString;
+  string output = columnString + rowString;
   return output;
 }

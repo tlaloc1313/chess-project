@@ -19,6 +19,8 @@ public:
   bool hasMoved;
   Piece();
 	int direction(int destination);
+	bool checkStraight(int destination, bool activeArray[64]);
+	bool checkDiagonal(int destination, bool activeArray[64]);
 	virtual bool checkPath(int destination, bool activeArray[64]);
   virtual bool move(int square, bool activeArray[64]);
   int getPosition();
@@ -31,16 +33,13 @@ public:
 class Bishop : public Piece {
 public:
   Bishop(int startingSquare, int isWhite);
-	bool checkPath(int destination, bool activeArray[64]);
   bool move(int square, bool activeArray[64]);
   ~Bishop();
 };
 
-
 class King : public Piece{
 public:
   King(int startingSquare, int isWhite);
-	bool checkPath(int destination, bool activeArray[64]);
   bool move(int square, bool activeArray[64]);
   ~King();
 };
@@ -48,7 +47,6 @@ public:
 class Knight : public Piece{
 public:
   Knight(int startingSquare, int isWhite);
-	bool checkPath(int destination, bool activeArray[64]);
   bool move(int square, bool activeArray[64]);
   ~Knight();
 };
@@ -56,7 +54,6 @@ public:
 class Pawn : public Piece{
 public:
   Pawn(int startingSquare, int isWhite);
-	bool checkPath(int destination, bool activeArray[64]);
   bool move(int square, bool activeArray[64]);
   ~Pawn();
 };
@@ -72,7 +69,6 @@ public:
 class Rook : public Piece{
 public:
   Rook(int startingSquare, int isWhite);
-	bool checkPath(int destination, bool activeArray[64]);
   bool move(int square, bool activeArray[64]);
   ~Rook();
 };

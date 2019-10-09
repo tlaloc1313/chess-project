@@ -9,10 +9,6 @@ Knight::Knight(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
-bool Knight::checkPath(int destination, bool activeArray[64]){
-	return 0;
-}
-
 bool Knight::move(int square, bool activeArray[64]){
   int currentPos = location;
   int dist = abs(currentPos - square);
