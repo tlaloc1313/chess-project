@@ -8,10 +8,6 @@ Bishop::Bishop(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
-bool Bishop::checkPath(int destination, bool activeArray[64]){
-	return 0;
-}
-
 bool Bishop::move(int square, bool activeArray[64]){
   int fromRow = row(location);
   int fromCol = col(location);
@@ -22,7 +18,7 @@ bool Bishop::move(int square, bool activeArray[64]){
     return 0;
   }
   //Honestly haven't thought enough about if this will work or not
-  if ( abs(toRow-fromRow) == abs(toCol-fromCol) ){
+  if ((abs(toRow-fromRow) == abs(toCol-fromCol)) && checkDiagonal(square, activeArray)){
     return 1;
   }
   else{

@@ -10,65 +10,12 @@ Queen::Queen(int startingSquare, int pieceIsWhite){
 bool Queen::checkPath(int destination, bool activeArray[64]){
 	int dir = direction(destination);
 
-	switch (dir) {
-		case 0:
-			for (int i = location+8; i < destination; i+=8) {
-				if (activeArray[i] == 1) {
-					return 0;
-				}
-			}
-			break;
-		case 2:
-			for (int i = location+1; i < destination; i++) {
-				if (activeArray[i] == 1) {
-					return 0;
-				}
-			}
-			break;
-		case 4:
-			for (int i = location-8; i > destination; i-=8) {
-				if (activeArray[i] == 1) {
-					return 0;
-				}
-			}
-			break;
-		case 6:
-			for (int i = location-1; i > destination; i--) {
-				if (activeArray[i] == 1) {
-					return 0;
-				}
-			}
-			break;
-		case 1:
-			for (int i = location+9; i < destination; i+=9) {
-				if (activeArray[i] == 1) {
-					return 0;
-				}
-			}
-			break;
-		case 3:
-			for (int i = location-7; i > destination; i-=7) {
-				if (activeArray[i] == 1) {
-					return 0;
-				}
-			}
-			break;
-		case 5:
-			for (int i = location-9; i > destination; i-=9) {
-				if (activeArray[i] == 1) {
-					return 0;
-				}
-			}
-			break;
-		case 7:
-			for (int i = location+7; i < destination; i+=7) {
-				if (activeArray[i] == 1) {
-					return 0;
-				}
-			}
-			break;
+	if (dir%2 == 0) {
+		return checkStraight(destination, activeArray);
+	} else {
+		return checkDiagonal(destination, activeArray);
 	}
-	return 1;
+	return 0;
 }
 
 bool Queen::move(int square, bool activeArray[64]){

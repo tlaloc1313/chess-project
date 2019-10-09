@@ -10,10 +10,6 @@ Pawn::Pawn(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
-bool Pawn::checkPath(int destination, bool activeArray[64]){
-	return 0;
-}
-
 //This function checks that a given move is legal
 bool Pawn::move(int square, bool activeArray[64]){
   //Can't move to same square
