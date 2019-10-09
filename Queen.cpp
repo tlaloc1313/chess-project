@@ -1,4 +1,4 @@
-#include "Pieces.h"
+#include "Queen.h"
 
 Queen::Queen(int startingSquare, int pieceIsWhite){
   location = startingSquare;

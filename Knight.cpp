@@ -1,6 +1,4 @@
-#include "Pieces.h"
-#include <cmath>
-#include <iostream>
+#include "Knight.h"
 
 Knight::Knight(int startingSquare, int pieceIsWhite){
   location = startingSquare;

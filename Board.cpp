@@ -5,7 +5,6 @@ extern std::string encode(int code);
 
 //Basic constructor, needs no arguments
 Board::Board(){
-  activeArray;
   for (int i=0; i<64; i++){
     activeArray[i]=0;
   }

@@ -1,4 +1,4 @@
-#include "Pieces.h"
+#include "Rook.h"
 
 Rook::Rook(int startingSquare, int pieceIsWhite){
   location = startingSquare;

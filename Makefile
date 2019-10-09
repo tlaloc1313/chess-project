@@ -7,22 +7,22 @@ Chess++: main.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cp
 Piece.o: Piece.cpp Pieces.h
 	$(CXX) -c Piece.cpp -o Piece.o
 
-Bishop.o: Bishop.cpp Pieces.h
+Bishop.o: Bishop.cpp Bishop.h Piece.h
 	$(CXX) -c Bishop.cpp -o Bishop.o
 
-King.o: King.cpp Pieces.h
+King.o: King.cpp King.h Piece.h
 	$(CXX) -c King.cpp -o King.o
 
-Knight.o: Knight.cpp Pieces.h
+Knight.o: Knight.cpp Knight.h Piece.h
 	$(CXX) -c Knight.cpp -o Knight.o
 
-Pawn.o: Pawn.cpp Pieces.h
+Pawn.o: Pawn.cpp Pawn.h Piece.h
 	$(CXX) -c Pawn.cpp -o Pawn.o
 
-Queen.o: Queen.cpp Pieces.h
+Queen.o: Queen.cpp Queen.h Piece.h
 	$(CXX) -c Queen.cpp -o Queen.o
 
-Rook.o: Rook.cpp Pieces.h
+Rook.o: Rook.cpp Rook.h Piece.h
 	$(CXX) -c Rook.cpp -o Rook.o
 
 Board.o: Board.cpp Board.h

@@ -1,9 +1,7 @@
-#include "Pieces.h"
-#include <iostream>
-#include <cmath>
+#include "Piece.h"
 
 Piece::Piece(){
-  std::cout<<"Created Piece\n";
+
 }
 
 //Returns the direction the piece will move in from 0-7, anticlockwise from the positive horizontal
@@ -109,11 +107,11 @@ bool Piece::checkDiagonal(int destination, bool activeArray[64]) {
 }
 
 bool Piece::checkPath(int destination, bool activeArray[64]){
-
+  return 0;
 }
 
 bool Piece::move(int square, bool activeArray[64]){
-
+  return 0;
 }
 
 int Piece::getPosition(){

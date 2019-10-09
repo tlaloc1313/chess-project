@@ -1,4 +1,4 @@
-#include "Pieces.h"
+#include "King.h"
 
 King::King(int startingSquare, int pieceIsWhite){
   location = startingSquare;

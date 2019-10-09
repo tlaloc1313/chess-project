@@ -1,6 +1,4 @@
-#include "Pieces.h"
-#include <cmath>
-#include <iostream>
+#include "Pawn.h"
 
 //Constructor
 Pawn::Pawn(int startingSquare, int pieceIsWhite){
