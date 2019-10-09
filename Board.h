@@ -1,5 +1,6 @@
 #include "Pieces.h"
 
+#include <vector>
 #include <string>
 
 #ifndef BOARD_H
@@ -11,8 +12,8 @@ class Board {
 private:
   Piece* pieceArray[64]; //Array of pieces corresponding to squares
   bool activeArray[64]; //Tracks if a square has a piece
-  char pastPieces[200];
-  int pastMoves[200];
+  std::vector<char> pastPieces;
+  std::vector<int> pastMoves;
   int moveNumber;
 
 public:

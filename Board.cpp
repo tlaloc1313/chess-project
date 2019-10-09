@@ -47,8 +47,8 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     pieceArray[endSpace] = pieceArray[startSpace]; //Copies the pointer to the piece within the array
 
     //If a piece is being moved
-    pastPieces[moveNumber] = pieceArray[endSpace]->getType();
-    pastMoves[moveNumber] = endSpace;
+    pastPieces.push_back(pieceArray[endSpace]->getType());
+    pastMoves.push_back(endSpace);
     moveNumber++;
     return 1;
   }
@@ -82,6 +82,8 @@ int Board::addPiece(char type, int startSpace, int isWhite){
       pieceArray[startSpace] = new Rook(startSpace, isWhite);
       break;
   }
+
+  return 0;
 }
 
 //Gets the unicode chess piece for a given square
@@ -122,6 +124,8 @@ const char* Board::getPiece(int space){
       return u8"\u265B";
     }
   }
+
+  return u8"U+FFFD";
 }
 
 const char* Board::getPastPiece(int number){
@@ -139,6 +143,8 @@ const char* Board::getPastPiece(int number){
     case 'q':
     return u8"\u2655";
   }
+
+  return u8"\uFFFD";
 }
 
 std::string Board::getPastSquare(int number){
