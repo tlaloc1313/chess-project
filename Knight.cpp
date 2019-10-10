@@ -1,5 +1,6 @@
 #include "Knight.h"
 
+//Basic constructor for Knight subclass.
 Knight::Knight(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'n';
@@ -7,6 +8,8 @@ Knight::Knight(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
+//Given a destination square, this function checks if the piece is capable of moving
+//and returns 1 if it is a legal move. Returns 0 if not.
 bool Knight::move(int square, bool activeArray[64]){
   int currentPos = location;
   int dist = abs(currentPos - square);
@@ -36,6 +39,7 @@ bool Knight::move(int square, bool activeArray[64]){
 }
 //+10, +6, -6, -10, -15, -17, +15, +17
 
+//Basic destructor for Knight subclass.
 Knight::~Knight(){
 
 }

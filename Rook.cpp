@@ -1,5 +1,6 @@
 #include "Rook.h"
 
+//Basic constructor for the Rook subclass.
 Rook::Rook(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'r';
@@ -7,6 +8,8 @@ Rook::Rook(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
+//Given a destination square, this function checks if the piece is capable of moving
+//and returns 1 if it is a legal move. Returns 0 if not.
 bool Rook::move(int square, bool activeArray[64]){
   int currentLocation = location;
   //Illegal if moving to current position
@@ -24,6 +27,7 @@ bool Rook::move(int square, bool activeArray[64]){
 	return 0;
 }
 
+//Basic destructor for the Rook subclass.
 Rook::~Rook(){
 
 }

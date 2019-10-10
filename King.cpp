@@ -1,5 +1,7 @@
 #include "King.h"
+#include <iostream>
 
+//Basic constructor for King subclass.
 King::King(int startingSquare, int pieceIsWhite){
   location = startingSquare;
   pieceType = 'k';
@@ -7,7 +9,10 @@ King::King(int startingSquare, int pieceIsWhite){
   hasMoved = 0;
 }
 
+//Given a destination square, this function checks if the piece is capable of moving
+//and returns 1 if it is a legal move. Returns 0 if not.
 bool King::move(int square, bool activeArray[64]){
+  //Decoding square numbers:
   int fromRow = row(location);
   int fromCol = col(location);
   int toRow = row(square);
@@ -27,6 +32,7 @@ bool King::move(int square, bool activeArray[64]){
   return 0;
 }
 
+//Basic destructor for King subclass.
 King::~King(){
-
+  std::cout << "This should never have been allowed to happen." << '\n';
 }

@@ -25,7 +25,8 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     return -1;
   }
 
-  if (activeArray[startSpace] == 0){ //Check a piece exists at StartSpace
+  //Check that a piece exists at StartSpace
+  if (activeArray[startSpace] == 0){
     return -2;
   }
 
@@ -43,7 +44,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
   int success = pieceArray[startSpace]->move(endSpace, activeArray);
   if (success == 1){
-    if (spaceWasOccupied == 1){//If a piece is being taken
+    if (spaceWasOccupied == 1){//If a piece is being taken, deletes that piece
       delete pieceArray[endSpace];
     }
     activeArray[startSpace] = 0; //Clears the startSpace since the piece is moving
@@ -72,7 +73,8 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
           break;
       }
     }
-    //If a piece is being moved
+
+    //If a piece is being moved, adds the move to the history arrays.
     pastPieces.push_back(pieceArray[endSpace]->getType());
     pastMoves.push_back(endSpace);
     moveNumber++;
@@ -87,7 +89,7 @@ int Board::addPiece(char type, int startSpace, int isWhite){
   if (activeArray[startSpace] == 1){ //If the space is taken
     return -1;
   }
-  activeArray[startSpace] = 1;
+  activeArray[startSpace] = 1; //Activates the space before placing the piece
   switch (type){
     case 'b':
       pieceArray[startSpace] = new Bishop(startSpace, isWhite);
@@ -154,6 +156,8 @@ const char* Board::getPiece(int space){
   return u8"U+FFFD";
 }
 
+//This function gets the unicode character from the pastPieces vector to allow move
+//history to be printed.
 const char* Board::getPastPiece(int number){
   int isWhite = ((number + 1) % 2);
 
@@ -191,17 +195,21 @@ const char* Board::getPastPiece(int number){
     }
   }
 
+  //Error character
   return u8"\uFFFD";
 }
 
+//Given a move number, returns a string in chess notation of the desination square.
 std::string Board::getPastSquare(int number){
   return encode(pastMoves[number]);
 }
 
+// Gives accesss to the moveNumber variable, which stores how many moves have been played.
 int Board::getMoveNumber(){
   return moveNumber;
 }
 
+// Gives access to the activeArray, a 64-long boolean array which records if squares have pieces on them.
 bool* Board::getActiveArray(){
 	return activeArray;
 }

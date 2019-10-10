@@ -48,5 +48,7 @@ int setup(Board* gameBoard) {
   //Queens
   gameBoard->addPiece('q', 24, 1);
   gameBoard->addPiece('q', 31, 0);
+
+//Success
 return 0;
 }

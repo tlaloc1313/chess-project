@@ -131,7 +131,7 @@ int inputFunc(void) {
   return square;
 }
 
-//Converts a square to chess notation
+//Converts a square number to chess notation
 string encode(int code){
 
   int row = code%8; //gets an integer for the row

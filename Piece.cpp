@@ -1,5 +1,6 @@
 #include "Piece.h"
 
+//Basic piece constructor allows for creation of empty Piece objects.
 Piece::Piece(){
 
 }
@@ -107,6 +108,7 @@ int Piece::checkDiagonal(int destination, bool activeArray[64]) {
 	return -1;
 }
 
+//Placeholder functions to allow for initialisation of empty Piece objects.
 bool Piece::checkPath(int destination, bool activeArray[64]){
   return 0;
 }
@@ -115,6 +117,7 @@ bool Piece::move(int square, bool activeArray[64]){
   return 0;
 }
 
+//These functions return the required values for use by outside functions.
 int Piece::getPosition(){
   return location;
 }
@@ -127,6 +130,7 @@ bool Piece::getIsWhite(){
   return isWhite;
 }
 
+//Basic destructor for Piece objects.
 Piece::~Piece(){
 
 }
