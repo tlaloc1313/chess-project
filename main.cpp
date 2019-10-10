@@ -10,7 +10,7 @@ using std::string;
 
 extern int setup(Board* gameBoard);
 extern int inputFunc();
-extern int draw(Board* gameBoard);
+extern int draw(Board* gameBoard, bool isWhiteTurn);
 
 int main(int argc, char const *argv[]) {
 
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[]) {
 	bool blackCheat = 0;
 
   while (gameEnd == 0){
-    draw(gameBoard);
+    draw(gameBoard, whiteTurn);
 
     //Display whose turn it is
     if (whiteTurn==1){
@@ -75,7 +75,7 @@ int main(int argc, char const *argv[]) {
 							} else {
 								blackCheat = 1;
 							}
-							draw(gameBoard);
+							draw(gameBoard, whiteTurn);
 						}
 					}
 					break;

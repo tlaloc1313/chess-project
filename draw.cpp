@@ -3,6 +3,10 @@ using std::cout;
 using std::cin;
 using std::wcout;
 
+#ifndef SPACINGH
+#define SPACINGH "   "
+#endif
+
 #include "Board.h"
 
 void drawMoves(Board* gameBoard){
@@ -13,35 +17,63 @@ void drawMoves(Board* gameBoard){
   cout << "\n\n";
 }
 
-int draw(Board* gameBoard) {
+int draw(Board* gameBoard, bool isWhiteTurn) {
   int currentSquare;
 
   for (int n=0; n<10; n++){
     cout<<"\n\n\n\n\n\n\n\n\n\n";
   }
 
-  for (int row=7; row>=0; row--){
+  if (isWhiteTurn == 1){
 
-    cout<<row+1<<"   ";
+    for (int row=7; row>=0; row--){
 
-    for (int column=0; column<8; column++){
-      currentSquare = (column*8) + row;
+      cout<<row+1<<SPACINGH;
 
-      //Where the square is occupied
-      if (gameBoard->spaceOccupied(currentSquare) == 1){
-        cout<<gameBoard->getPiece(currentSquare)<<"   ";
-      } else { //Where the square is unoccupied
-        if ((column+row)%2 == 0){
-          cout<<"#"<<"   ";
-        } else {
-          cout<<" "<<"   ";
+      for (int column=0; column<8; column++){
+        currentSquare = (column*8) + row;
+
+        //Where the square is occupied
+        if (gameBoard->spaceOccupied(currentSquare) == 1){
+          cout<<gameBoard->getPiece(currentSquare)<<SPACINGH;
+        } else { //Where the square is unoccupied
+          if ((column+row)%2 == 0){
+            cout<<"#"<<SPACINGH;
+          } else {
+            cout<<" "<<SPACINGH;
+          }
         }
       }
+      cout<<"\n\n";
     }
-    cout<<"\n\n";
-  }
 
-  cout<<"    a   b   c   d   e   f   g   h \n\n";
+    cout<<" "<<SPACINGH<<"a"<<SPACINGH<<"b"<<SPACINGH<<"c"<<SPACINGH<<"d"<<SPACINGH<<"e"<<SPACINGH<<"f"<<SPACINGH<<"g"<<SPACINGH<<"h \n\n";
+
+  } else {
+
+    for (int row=0; row<8; row++){
+
+      cout<<row+1<<SPACINGH;
+
+      for (int column=7; column>=0; column--){
+        currentSquare = (column*8) + row;
+
+        //Where the square is occupied
+        if (gameBoard->spaceOccupied(currentSquare) == 1){
+          cout<<gameBoard->getPiece(currentSquare)<<SPACINGH;
+        } else { //Where the square is unoccupied
+          if ((column+row)%2 == 0){
+            cout<<"#"<<SPACINGH;
+          } else {
+            cout<<" "<<SPACINGH;
+          }
+        }
+      }
+      cout<<"\n\n";
+    }
+
+    cout<<" "<<SPACINGH<<"h"<<SPACINGH<<"g"<<SPACINGH<<"f"<<SPACINGH<<"e"<<SPACINGH<<"d"<<SPACINGH<<"c"<<SPACINGH<<"b"<<SPACINGH<<"a \n\n";
+  }
 
   drawMoves(gameBoard);
 
