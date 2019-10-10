@@ -9,9 +9,10 @@ using std::string;
 #include "Board.h"
 
 extern int setup(Board* gameBoard);
+extern int setupTestCheck(Board* gameBoard);
 extern int inputFunc();
 extern int draw(Board* gameBoard, bool isWhiteTurn);
-extern int checkCheck(Board* board, bool isWhiteTurn);
+extern int check(Board* board, bool isWhiteTurn);
 
 int main(int argc, char const *argv[]) {
 
@@ -27,13 +28,14 @@ int main(int argc, char const *argv[]) {
   int gameEnd = 0;
   // Setup a game
   Board* gameBoard = new Board();
-  setup(gameBoard);
+  setupTestCheck(gameBoard);
 
 	//Records if a player has used a cheat code
 	bool whiteCheat = 0;
 	bool blackCheat = 0;
 
 	int inCheck = 0;
+	int copySuccess = 0;
 
   while (gameEnd == 0){
     draw(gameBoard, whiteTurn);
@@ -95,9 +97,9 @@ int main(int argc, char const *argv[]) {
 			*gameBoardCopy = *gameBoard;
 
 			success = gameBoard->movePiece(startPos, endPos, whiteTurn);
-			gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
+			copySuccess = gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
 
-			inCheck = checkCheck(gameBoardCopy, whiteTurn);
+			inCheck = gameBoard->checkCheck(whiteTurn);
 
 			switch (inCheck) {
 				case 1:

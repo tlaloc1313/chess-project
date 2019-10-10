@@ -1,7 +1,7 @@
 #include "Piece.h"
 
 Piece::Piece(){
-
+	pieceType = '?';
 }
 
 //Returns the direction the piece will move in from 0-7, anticlockwise from east
