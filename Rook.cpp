@@ -17,6 +17,7 @@ bool Rook::move(int square, bool activeArray[64]){
   //Move OK if piece is moving to same row or col and path is empty
   if ((row(currentLocation) == row(square) || col(currentLocation) == col(square)) && checkStraight(square, activeArray) == -1){
     location = square;
+    hasMoved = 1;
     return 1;
   }
 

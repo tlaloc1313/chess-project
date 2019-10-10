@@ -32,6 +32,7 @@ bool Queen::move(int square, bool activeArray[64]){
   //Move OK if piece is moving to same row or col OR moving diagonally AND path is free
   if (((row(currentLocation) == row(square) || col(currentLocation) == col(square)) || (abs(row(square)-row(location)) == abs(col(square)-col(location)))) && checkPath(square, activeArray)){
     location = square;
+    hasMoved = 1;
     return 1;
   }
 

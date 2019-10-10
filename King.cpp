@@ -20,6 +20,8 @@ bool King::move(int square, bool activeArray[64]){
 
   //King can move 1 square in any direction
   if ( abs(fromRow-toRow)<2 && abs(fromCol-toCol)<2 ){
+    location = square;
+    hasMoved = 1;
     return 1;
   }
   return 0;
