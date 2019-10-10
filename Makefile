@@ -30,3 +30,6 @@ Board.o: Board.cpp Board.h
 
 Piecetest: Pawn.o Bishop.o Rook.o Knight.o Piece.o King.cpp piecetest.cpp decodeEncode.cpp Queen.o position.cpp
 	$(CXX) piecetest.cpp position.cpp Pawn.o Piece.o King.cpp Bishop.o Knight.o Rook.o Queen.o decodeEncode.cpp -o Piecetest
+
+Checktest: testCheck.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
+	$(CXX) testCheck.cpp draw.cpp setup.cpp checkCheck.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o Checktest

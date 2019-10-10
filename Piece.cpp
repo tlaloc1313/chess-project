@@ -2,7 +2,7 @@
 
 //Basic piece constructor allows for creation of empty Piece objects.
 Piece::Piece(){
-
+	pieceType = '?';
 }
 
 //Returns the direction the piece will move in from 0-7, anticlockwise from east
