@@ -129,19 +129,40 @@ const char* Board::getPiece(int space){
 }
 
 const char* Board::getPastPiece(int number){
-  switch (pastPieces[number]) {
-    case 'p':
-    return u8"\u2659";
-    case 'r':
-    return u8"\u2656";
-    case 'b':
-    return u8"\u2657";
-    case 'n':
-    return u8"\u2658";
-    case 'k':
-    return u8"♔";
-    case 'q':
-    return u8"\u2655";
+  int isWhite = ((number + 1) % 2);
+
+  if (isWhite == 1){
+    //White Pieces
+    switch (pastPieces[number]) {
+      case 'p':
+      return u8"\u2659";
+      case 'r':
+      return u8"\u2656";
+      case 'b':
+      return u8"\u2657";
+      case 'n':
+      return u8"\u2658";
+      case 'k':
+      return u8"♔";
+      case 'q':
+      return u8"\u2655";
+    }
+  } else {
+    //Black Pieces
+    switch (pastPieces[number]) {
+      case 'p':
+      return u8"\u265F";
+      case 'r':
+      return u8"\u265C";
+      case 'b':
+      return u8"\u265D";
+      case 'n':
+      return u8"\u265E";
+      case 'k':
+      return u8"\u265A";
+      case 'q':
+      return u8"\u265B";
+    }
   }
 
   return u8"\uFFFD";
