@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <random>
 using std::cout;
 using std::cin;
 using std::string;
@@ -26,6 +28,10 @@ int main(int argc, char const *argv[]) {
   Board* gameBoard = new Board();
   setup(gameBoard);
 
+	//Records if a player has used a cheat code
+	bool whiteCheat = 0;
+	bool blackCheat = 0;
+
   while (gameEnd == 0){
     draw(gameBoard);
 
@@ -43,6 +49,42 @@ int main(int argc, char const *argv[]) {
 
       cout << "From: ";
       int startPos = inputFunc();
+
+			//Cheat code - creates a queen of the current player in a random, unoccupied square
+			//There is a 1 in 10 chance to create an opponent's queen
+			if (startPos == 1000) {
+				if ((whiteTurn && whiteCheat == 0) || (!whiteTurn && blackCheat == 0)) {
+					unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();	//Current time in ms
+					std::default_random_engine generator (seed);	//Generates uniformly distributed numbers
+					std::uniform_int_distribution<int> sqrDist(0,63);	//Uniform int distribution from 0-63
+					std::uniform_int_distribution<int> failDist(0,9);	//Uniform int distribution from 0-9
+					bool free = 0;
+					while (!free) {
+						int randNum = sqrDist(generator);	//Generates the number
+						if (gameBoard->spaceOccupied(randNum) == 0) {
+							free = 1;
+							if (failDist(generator) == 0) {
+								gameBoard->addPiece('q', randNum, !whiteTurn);	//Adds opponent's queen
+								cout << "Bad luck...\n";
+							} else {
+								gameBoard->addPiece('q', randNum, whiteTurn);		//Adds player's queen
+							}
+							//Uses the cheat of the current player
+							if (whiteTurn) {
+								whiteCheat = 1;
+							} else {
+								blackCheat = 1;
+							}
+							draw(gameBoard);
+						}
+					}
+					break;
+				} else {
+					cout << "Nice try 😉\n";
+					continue;
+				}
+			}
+
       cout << "To: ";
       int endPos = inputFunc();
 

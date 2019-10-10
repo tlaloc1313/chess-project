@@ -18,8 +18,18 @@ int inputFunc(void) {
 	while (invInput) {
 		cin >> input;
 
+		//Tilde signifies that a cheat code is following
+		if (input[0] == '~') {
+			if (input.compare("~UUDDLRLRBAS") == 0) {
+				return 1000;
+			}
+			cout << "Invalid square, try again:\n";
+			invInput = true;
+			continue;
+		}
+
 		//Checks that the input is the correct length
-		if (!(input.length() == 2)) {
+		if (input.length() != 2) {
 			cout << "Invalid square, try again:\n";
 			invInput = true;
 			continue;
