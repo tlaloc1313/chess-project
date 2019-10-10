@@ -18,12 +18,12 @@ bool Bishop::move(int square, bool activeArray[64]){
   }
   //Honestly haven't thought enough about if this will work or not
   if ((abs(toRow-fromRow) == abs(toCol-fromCol)) && checkDiagonal(square, activeArray)){
-    return 1;
+		location = square;
+		return 1;
   }
   else{
     return 0;
   }
-
 }
 
 Bishop::~Bishop(){
