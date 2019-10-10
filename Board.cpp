@@ -21,6 +21,10 @@ bool Board::spaceOccupied(int space){
 
 //See Board.h for description.
 int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
+  if (startSpace > 63){
+    return -1;
+  }
+
   if (activeArray[startSpace] == 0){ //Check a piece exists at StartSpace
     return -2;
   }
@@ -30,7 +34,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     return -2;
   }
 
-  //It is illegal to take your own pieces:
+  //It is illegal and illogical to take your own pieces:
   if ((activeArray[endSpace]==1)) {
     if ((pieceArray[endSpace]->getIsWhite() == pieceArray[startSpace]->getIsWhite())){
       return -1;

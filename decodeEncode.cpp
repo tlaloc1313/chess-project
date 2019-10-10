@@ -1,6 +1,10 @@
 #include <string>
 #include <iostream>
 
+#ifndef INVSQUARE
+#define INVSQUARE "Invalid square, try again:\n"
+#endif
+
 using std::cout;
 using std::cin;
 using std::string;
@@ -23,14 +27,19 @@ int inputFunc(void) {
 			if (input.compare("~UUDDLRLRBAS") == 0) {
 				return 1000;
 			}
-			cout << "Invalid square, try again:\n";
+			cout << INVSQUARE;
 			invInput = true;
 			continue;
 		}
 
+    //Checks for either of the  castling sequences
+    if ( (input.compare("O-O-O") == 0) || (input.compare("O-O") == 0)){
+      return 69;
+    }
+
 		//Checks that the input is the correct length
 		if (input.length() != 2) {
-			cout << "Invalid square, try again:\n";
+			cout << INVSQUARE;
 			invInput = true;
 			continue;
 		}
@@ -72,7 +81,7 @@ int inputFunc(void) {
 				break;
 			//Returns to start of loop if invalid input
 			default:
-				cout << "Invalid square, try again:\n";
+				cout << INVSQUARE;
 				invInput = true;
 				continue;
 	  }
@@ -114,7 +123,7 @@ int inputFunc(void) {
 				break;
 			//Returns to start of loop if invalid input
 			default:
-				cout << "Invalid square, try again:\n";
+				cout << INVSQUARE;
 				invInput = true;
 	  }
 	}
