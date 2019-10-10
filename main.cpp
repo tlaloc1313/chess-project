@@ -33,7 +33,7 @@ int main(int argc, char const *argv[]) {
 	bool whiteCheat = 0;
 	bool blackCheat = 0;
 
-	int inCheck = 0;
+	// int inCheck = 0;
 
   while (gameEnd == 0){
     draw(gameBoard, whiteTurn);
@@ -91,19 +91,45 @@ int main(int argc, char const *argv[]) {
       cout << "To: ";
       int endPos = inputFunc();
 
-			Board* gameBoardCopy = new Board();
-			*gameBoardCopy = *gameBoard;
+      //CASTLING
+      if (startPos == 69) {
+        switch (endPos){
 
-			success = gameBoard->movePiece(startPos, endPos, whiteTurn);
-			gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
+          //White castling queenside
+          case 8:
+            if (whiteTurn == 0){
+              break;
+            }
 
-			inCheck = checkCheck(gameBoardCopy, whiteTurn);
+          break;
 
-			switch (inCheck) {
-				case 1:
-					success = 0;
-					break;
-			}
+          //Black castling queenside
+          case 15:
+            if (whiteTurn == 1){
+              break;
+            }
+
+          break;
+
+          //White castling kingside
+          case 48:
+            if (whiteTurn == 0){
+              break;
+            }
+
+          break;
+
+          //Black castling kingside
+          case 55:
+            if (whiteTurn == 1){
+              break;
+            }
+
+          break;
+        }
+      }
+
+      success = gameBoard->movePiece(startPos, endPos, whiteTurn);
 
       if (success != 1){
         std::cout << "Invalid Move" << '\n';

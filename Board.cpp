@@ -25,6 +25,10 @@ bool Board::spaceOccupied(int space){
 
 //See Board.h for description.
 int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
+  if (startSpace > 63){
+    return -1;
+  }
+
   if (activeArray[startSpace] == 0){ //Check a piece exists at StartSpace
     return -2;
   }
@@ -34,7 +38,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     return -2;
   }
 
-  //It is illegal to take your own pieces:
+  //It is illegal and illogical to take your own pieces:
   if ((activeArray[endSpace]==1)) {
     if ((pieceArray[endSpace]->getIsWhite() == pieceArray[startSpace]->getIsWhite())){
       return -1;
@@ -50,6 +54,28 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     activeArray[endSpace] = 1; //Marks the endSpace as taken
     pieceArray[endSpace] = pieceArray[startSpace]; //Copies the pointer to the piece within the array
 
+    //PROMOTING A PAWN
+    if (pieceArray[endSpace]->getType()=='p'&& (row(endSpace)==7 || row(endSpace)==0)){
+      bool pawnWasWhite = pieceArray[endSpace]->getIsWhite();
+      delete pieceArray[endSpace];
+      char promotePiece;
+      std::cout << "Please enter a letter corresponding to the piece you would like to promote to (q, r, n, b):" << '\n';
+      std::cin >> promotePiece;
+      switch (promotePiece){
+        case 'b':
+          pieceArray[endSpace] = new Bishop(endSpace, pawnWasWhite);
+          break;
+        case 'n':
+          pieceArray[endSpace] = new Knight(endSpace, pawnWasWhite);
+          break;
+        case 'q':
+          pieceArray[endSpace] = new Queen(endSpace, pawnWasWhite);
+          break;
+        case 'r':
+          pieceArray[endSpace] = new Rook(endSpace, pawnWasWhite);
+          break;
+      }
+    }
     //If a piece is being moved
     pastPieces.push_back(pieceArray[endSpace]->getType());
     pastMoves.push_back(endSpace);
