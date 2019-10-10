@@ -155,6 +155,10 @@ int Board::getMoveNumber(){
   return moveNumber;
 }
 
+bool* Board::getActiveArray(){
+	return activeArray;
+}
+
 //Destructor has no specific behaviour
 Board::~Board(){
 

@@ -23,6 +23,7 @@ public:
   const char* getPastPiece(int number);
   std::string getPastSquare(int number);
   int getMoveNumber();
+	bool* getActiveArray();
 
   //Returns 2 if a piece is taken, 1 if the piece is moved,
   //-1 if the move is illegal, -2 if the piece doesn't exist

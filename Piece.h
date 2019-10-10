@@ -18,8 +18,8 @@ protected:
 public:
   Piece();
 	int direction(int destination);
-	bool checkStraight(int destination, bool activeArray[64]);
-	bool checkDiagonal(int destination, bool activeArray[64]);
+	int checkStraight(int destination, bool activeArray[64]);
+	int checkDiagonal(int destination, bool activeArray[64]);
 	virtual bool checkPath(int destination, bool activeArray[64]);
   virtual bool move(int square, bool activeArray[64]);
   int getPosition();

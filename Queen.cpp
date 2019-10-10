@@ -11,9 +11,13 @@ bool Queen::checkPath(int destination, bool activeArray[64]){
 	int dir = direction(destination);
 
 	if (dir%2 == 0) {
-		return checkStraight(destination, activeArray);
+		if (checkStraight(destination, activeArray) == -1) {
+			return 1;
+		}
 	} else {
-		return checkDiagonal(destination, activeArray);
+		if (checkDiagonal(destination, activeArray) == -1) {
+			return 1;
+		}
 	}
 	return 0;
 }
