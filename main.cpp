@@ -19,7 +19,7 @@ int main(int argc, char const *argv[]) {
     cout<<"\n\n\n\n\n\n\n\n\n\n";
   }
 
-  cout<<"Welcome to Chess++, a chess interface developed in C++11.\nPress Enter/Return to continue...";
+  cout<<"Welcome to Chess++, a chess interface developed in C++11.\n\nPress Enter/Return to continue...";
   cin.get();
 
   //Set first turn to white
@@ -36,6 +36,13 @@ int main(int argc, char const *argv[]) {
 	// int inCheck = 0;
 
   while (gameEnd == 0){
+
+    //50 Move Rules
+    if (gameBoard->getMovesSince()>100){
+      cout << "50 Move Rule - Game is Drawn\n";
+      return 0;
+    }
+
     draw(gameBoard, whiteTurn);
 
     //Display whose turn it is

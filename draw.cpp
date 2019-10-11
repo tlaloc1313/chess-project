@@ -60,9 +60,9 @@ int draw(Board* gameBoard, bool isWhiteTurn) {
           cout<<gameBoard->getPiece(currentSquare)<<SPACINGH;
         } else { //Where the square is unoccupied, print either a black or white square
           if ((column+row)%2 == 0){
-            cout<<"#"<<SPACINGH;
+            cout<<u8"\u25A0"<<SPACINGH;
           } else {
-            cout<<" "<<SPACINGH;
+            cout<<u8"\u25A1"<<SPACINGH;
           }
         }
       }
@@ -89,9 +89,9 @@ int draw(Board* gameBoard, bool isWhiteTurn) {
           cout<<gameBoard->getPiece(currentSquare)<<SPACINGH;
         } else { //Where the square is unoccupied, print either a black or white square
           if ((column+row)%2 == 0){
-            cout<<"#"<<SPACINGH;
+            cout<<u8"\u25A0"<<SPACINGH;
           } else {
-            cout<<" "<<SPACINGH;
+            cout<<u8"\u25A1"<<SPACINGH;
           }
         }
       }

@@ -13,6 +13,7 @@ Board::Board(){
 		pieceArray[i] = new Piece();
 	}
   moveNumber = 0;
+  movesSince = 0;
 };
 
 //Checks if a space on the board is occupied
@@ -48,8 +49,9 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
   int success = pieceArray[startSpace]->move(endSpace, activeArray);
   if (success == 1){
-    if (spaceWasOccupied == 1){//If a piece is being taken, deletes that piece
+    if (spaceWasOccupied == 1){//If a piece is being taken, deletes that piece and resets 50 moves
       delete pieceArray[endSpace];
+      movesSince = -1;
     }
     activeArray[startSpace] = 0; //Clears the startSpace since the piece is moving
     activeArray[endSpace] = 1; //Marks the endSpace as taken
@@ -76,12 +78,20 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
           pieceArray[endSpace] = new Rook(endSpace, pawnWasWhite);
           break;
       }
+      movesSince = -1;
     }
 
     //If a piece is being moved, adds the move to the history arrays.
     pastPieces.push_back(pieceArray[endSpace]->getType());
     pastMoves.push_back(endSpace);
     moveNumber++;
+
+    //if needed, resets the 50 move rule.
+    if (pieceArray[endSpace]->getType() == 'p') {
+      movesSince = -1;
+    }
+
+    movesSince++;
     return 1;
   }
   //If the move was illegal
@@ -405,8 +415,13 @@ int Board::castle (int castleColour, int castleKingSide){
   } else {
     pastMoves.push_back(70);
   }
+  movesSince++;
   moveNumber++;
   return 1;
+}
+
+int Board::getMovesSince(){
+  return movesSince;
 }
 
 //Destructor has no specific behaviour
