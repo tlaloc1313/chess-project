@@ -21,6 +21,8 @@ bool Pawn::move(int square, bool activeArray[64]){
   int toRow = row(square);
   int toCol = col(square);
 
+  enPassantPossible = 0; //By default, en passant is impossible
+
   //Same-column movement only, when not taking another piece
   if (fromCol == toCol && activeArray[square]==0){
 
@@ -35,6 +37,7 @@ bool Pawn::move(int square, bool activeArray[64]){
             if (activeArray[square-1]==0){ //Checks that intermediate square is empty
               location = square;
               hasMoved = 1;
+              enPassantPossible = 1;
               return 1;
             }
           }
@@ -61,6 +64,7 @@ bool Pawn::move(int square, bool activeArray[64]){
             if (activeArray[square+1]==0){ //Checks that intermediate square is empty
               location = square;
               hasMoved = 1;
+              enPassantPossible = 1;
               return 1;
             }
           }
@@ -100,6 +104,10 @@ bool Pawn::move(int square, bool activeArray[64]){
 
   //If all tests fail, return 0
   return 0;
+}
+
+int Pawn::checkEnPassant(){
+	return enPassantPossible;
 }
 
 //Generic Destructor

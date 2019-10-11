@@ -14,6 +14,7 @@ protected:
   int location;
   bool isWhite;
   bool hasMoved;
+  bool enPassantPossible;
 
 public:
   Piece();
@@ -27,6 +28,7 @@ public:
   bool getIsWhite();
   bool getHasMoved();
   int castle(int square);
+  int checkEnPassant();
   virtual ~Piece ();
 };
 

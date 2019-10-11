@@ -26,6 +26,8 @@ bool Board::spaceOccupied(int space){
 
 //See Board.h for description.
 int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
+  int pieceTaken;
+
   if (startSpace > 63){
     return -1;
   }
@@ -47,10 +49,24 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     }
   }
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
+
+  //Checking for the en passant rule:
+  if ( (pieceArray[startSpace]->getType() == 'p') && (col(endSpace) != col(startSpace)) && (activeArray[endSpace] == 0) && (activeArray[endSpace+1-(2*whiteTurn)]) ){
+    if (pieceArray[endSpace]->checkEnPassant()){
+      //Pushes the pawn back to be taken, and continues as usual
+      activeArray[endSpace] = 1;
+      pieceArray[endSpace] = pieceArray[endSpace+1-(2*whiteTurn)];
+      activeArray[endSpace+1-(2*whiteTurn)] = 0;
+      spaceWasOccupied = 1;
+    }
+  }
+
   int success = pieceArray[startSpace]->move(endSpace, activeArray);
   if (success == 1){
+    pieceTaken = 0;
     if (spaceWasOccupied == 1){//If a piece is being taken, deletes that piece and resets 50 moves
       delete pieceArray[endSpace];
+      pieceTaken = 1;
       movesSince = -1;
     }
     activeArray[startSpace] = 0; //Clears the startSpace since the piece is moving
@@ -83,7 +99,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
 
     //If a piece is being moved, adds the move to the history arrays.
     pastPieces.push_back(pieceArray[endSpace]->getType());
-    pastMoves.push_back(endSpace);
+    pastMoves.push_back(endSpace+(200*pieceTaken));
     moveNumber++;
 
     //if needed, resets the 50 move rule.

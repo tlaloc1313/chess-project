@@ -142,6 +142,7 @@ int inputFunc(void) {
 
 //Converts a square number to chess notation
 string encode(int code){
+  string takeString = "";
 
   //Special Case: CASTLING
   if (code == 69){
@@ -149,6 +150,12 @@ string encode(int code){
   }
   if (code == 70){
     return "O-O-O";
+  }
+
+  //If the move took a piece
+  if (code>199 && code <264){
+    takeString = "x";
+    code -= 200;
   }
 
   int row = code%8; //gets an integer for the row
@@ -186,6 +193,6 @@ string encode(int code){
       return "Undefined";
   }
   //Concatenates the column and row
-  string output = columnString + rowString;
+  string output = takeString + columnString + rowString;
   return output;
 }

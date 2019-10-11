@@ -3,6 +3,7 @@
 //Basic piece constructor allows for creation of empty Piece objects.
 Piece::Piece(){
 	pieceType = '?';
+	enPassantPossible = 0;
 }
 
 //Returns the direction the piece will move in from 0-7, anticlockwise from east
@@ -136,6 +137,11 @@ bool Piece::getHasMoved(){
 
 //Normal pieces can't castle
 int Piece::castle(int square){
+	return -1;
+}
+
+//Normal pieces can't be taken en passant
+int Piece::checkEnPassant(){
 	return -1;
 }
 
