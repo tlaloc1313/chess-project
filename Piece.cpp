@@ -145,6 +145,15 @@ bool Piece::getIsWhite(){
   return isWhite;
 }
 
+bool Piece::getHasMoved(){
+	return hasMoved;
+}
+
+//Normal pieces can't castle
+int Piece::castle(int square){
+	return -1;
+}
+
 //Basic destructor for Piece objects.
 Piece::~Piece(){
 

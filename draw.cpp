@@ -22,6 +22,10 @@ void drawMoves(Board* gameBoard){
 
   //Loops from start to current point in game.
   for (int i = 0; i < gameBoard->getMoveNumber(); i++){
+    if (i%2 == 0){
+      cout << (i/2)+1 << ". ";
+    }
+
     cout << gameBoard->getPastPiece(i) << gameBoard->getPastSquare(i) << "  ";
   }
   cout << "\n\n";
@@ -56,9 +60,9 @@ int draw(Board* gameBoard, bool isWhiteTurn) {
           cout<<gameBoard->getPiece(currentSquare)<<SPACINGH;
         } else { //Where the square is unoccupied, print either a black or white square
           if ((column+row)%2 == 0){
-            cout<<"#"<<SPACINGH;
+            cout<<u8"\u25A0"<<SPACINGH;
           } else {
-            cout<<" "<<SPACINGH;
+            cout<<u8"\u25A1"<<SPACINGH;
           }
         }
       }
@@ -85,9 +89,9 @@ int draw(Board* gameBoard, bool isWhiteTurn) {
           cout<<gameBoard->getPiece(currentSquare)<<SPACINGH;
         } else { //Where the square is unoccupied, print either a black or white square
           if ((column+row)%2 == 0){
-            cout<<"#"<<SPACINGH;
+            cout<<u8"\u25A0"<<SPACINGH;
           } else {
-            cout<<" "<<SPACINGH;
+            cout<<u8"\u25A1"<<SPACINGH;
           }
         }
       }
