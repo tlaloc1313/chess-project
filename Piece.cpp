@@ -40,28 +40,28 @@ int Piece::checkStraight(int destination, bool activeArray[64]) {
 	int dir = direction(destination);
 
 	switch (dir) {
-		case 0:
+		case 0: //East
 			for (int i = location+8; i < destination; i+=8) {
 				if (activeArray[i] == 1) {
 					return i;
 				}
 			}
 			break;
-		case 2:
+		case 2: //North
 			for (int i = location+1; i < destination; i++) {
 				if (activeArray[i] == 1) {
 					return i;
 				}
 			}
 			break;
-		case 4:
+		case 4: //West
 			for (int i = location-8; i > destination; i-=8) {
 				if (activeArray[i] == 1) {
 					return i;
 				}
 			}
 			break;
-		case 6:
+		case 6: //South
 			for (int i = location-1; i > destination; i--) {
 				if (activeArray[i] == 1) {
 					return i;
@@ -76,28 +76,28 @@ int Piece::checkDiagonal(int destination, bool activeArray[64]) {
 	int dir = direction(destination);
 
 	switch (dir) {
-		case 1:
+		case 1: //North East
 			for (int i = location+9; i < destination; i+=9) {
 				if (activeArray[i] == 1) {
 					return i;
 				}
 			}
 			break;
-		case 3:
+		case 3: //North West
 			for (int i = location-7; i > destination; i-=7) {
 				if (activeArray[i] == 1) {
 					return i;
 				}
 			}
 			break;
-		case 5:
+		case 5: //South West
 			for (int i = location-9; i > destination; i-=9) {
 				if (activeArray[i] == 1) {
 					return i;
 				}
 			}
 			break;
-		case 7:
+		case 7: //South East
 			for (int i = location+7; i < destination; i+=7) {
 				if (activeArray[i] == 1) {
 					return i;
