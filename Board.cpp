@@ -163,6 +163,13 @@ const char* Board::getPiece(int space){
 //This function gets the unicode character from the pastPieces vector to allow move
 //history to be printed.
 const char* Board::getPastPiece(int number){
+
+  //Special Cases
+  if (pastPieces[number] == 'x'){
+    return u8"\u200A";
+  }
+
+
   int isWhite = ((number + 1) % 2);
 
   if (isWhite == 1){
@@ -325,8 +332,81 @@ int Board::checkCheck(bool isWhiteTurn) {
   return 0;
 }
 
-int Board::castle (int castleType){
-  return 0;
+
+//Attempts to castle based on the given side and colour. Returns 1 on success.
+int Board::castle (int castleColour, int castleKingSide){
+  int rook, king, numSquares, s1, s2, s3;
+  //Sets up the correct squares to check
+  if (castleColour){
+      king = 32;
+    if (castleKingSide){// White kingside
+      rook = 56;
+      numSquares = 2;
+      s1 = 40;
+      s2 = 48;
+    } else { // White Queenside
+      rook = 0;
+      numSquares = 3;
+      s1 = 24;
+      s2 = 16;
+      s3 = 8;
+    }
+  } else {
+      king = 39;
+    if (castleKingSide) { //Black kingside
+      rook = 63;
+      numSquares = 2;
+      s1 = 47;
+      s2 = 55;
+    } else { //Black queenside
+      rook = 7;
+      numSquares = 3;
+      s1 = 31;
+      s2 = 23;
+      s3 = 15;
+    }
+  }
+  //If pieces are not in place, fails.
+  if (!(activeArray[king] && activeArray[rook])){
+    return 0;
+  }
+  //If pieces are in the way, fails.
+  if (numSquares == 2) {
+    if (activeArray[s1] || activeArray[s2]){
+      return 0;
+    }
+  } else {
+    if (activeArray[s1] || activeArray[s2] || activeArray[s3]){
+      return 0;
+    }
+  }
+  //Check pieces aren't the wrong colour or type
+  if (!(pieceArray[king]->getIsWhite()==castleColour && pieceArray[rook]->getIsWhite()==castleColour && pieceArray[king]->getType()=='k' && pieceArray[rook]->getType()=='r' )){
+    return 0;
+  }
+  //If pieces have moved, casling fails
+  if (pieceArray[king]->getHasMoved() || pieceArray[rook]->getHasMoved()){
+    return 0;
+  }
+  //Attempts to castle
+  pieceArray[king]->castle(s2);
+  pieceArray[rook]->castle(s1);
+  activeArray[king] = 0; //Clears the startSpace since the piece is moving
+  activeArray[rook] = 0;
+  activeArray[s2] = 1; //Marks the endSpace as taken
+  activeArray[s1] = 1;
+  pieceArray[s1] = pieceArray[rook]; //Copies the pointer to the piece within the array
+  pieceArray[s2] = pieceArray[king];
+
+  //Adds move to history arrays
+  pastPieces.push_back('x');
+  if (castleKingSide){
+    pastMoves.push_back(69);
+  } else {
+    pastMoves.push_back(70);
+  }
+  moveNumber++;
+  return 1;
 }
 
 //Destructor has no specific behaviour

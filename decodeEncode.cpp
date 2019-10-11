@@ -134,6 +134,14 @@ int inputFunc(void) {
 //Converts a square number to chess notation
 string encode(int code){
 
+  //Special Case: CASTLING
+  if (code == 69){
+    return "O-O";
+  }
+  if (code == 70){
+    return "O-O-O";
+  }
+
   int row = code%8; //gets an integer for the row
   int column = (code-row)/8; //gets an integer for the column
   string rowString = to_string(row+1); //Converts to a string for concatenation

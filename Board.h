@@ -14,9 +14,9 @@ private:
   std::vector<char> pastPieces;
   std::vector<int> pastMoves;
   int moveNumber;
+  Piece* pieceArray[64]; //Array of pieces corresponding to squares
 
 public:
-	Piece* pieceArray[64]; //Array of pieces corresponding to squares
   Board ();
   bool spaceOccupied(int space); //Checks if a square is occupied
   const char* getPiece(int space); //Returns what type of piece is at a square
@@ -26,7 +26,7 @@ public:
 	Piece** getPieceArray();
 	bool* getActiveArray();
 	int checkCheck(bool isWhiteTurn);
-  int castle(int castleType);
+  int castle(int castleColour, int castleKingSide);
 
   //Returns 2 if a piece is taken, 1 if the piece is moved,
   //-1 if the move is illegal, -2 if the piece doesn't exist

@@ -98,30 +98,30 @@ int main(int argc, char const *argv[]) {
         switch (endPos){
 
           //White castling queenside
-          case 8:
-            if (whiteTurn == 0){
-              success = gameBoard->castle(1);
+          case 16:
+            if (whiteTurn == 1){
+              success = gameBoard->castle(1, 0);
             }
           break;
 
           //Black castling queenside
-          case 15:
-            if (whiteTurn == 1){
-              success = gameBoard->castle(2);
+          case 23:
+            if (whiteTurn == 0){
+              success = gameBoard->castle(0, 0);
             }
           break;
 
           //White castling kingside
           case 48:
-            if (whiteTurn == 0){
-              success = gameBoard->castle(3);
+            if (whiteTurn == 1){
+              success = gameBoard->castle(1, 1);
             }
           break;
 
           //Black castling kingside
           case 55:
-            if (whiteTurn == 1){
-              success = gameBoard->castle(4);
+            if (whiteTurn == 0){
+              success = gameBoard->castle(0, 1);
             }
           break;
         }
