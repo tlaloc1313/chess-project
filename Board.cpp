@@ -9,9 +9,6 @@ Board::Board(){
   for (int i=0; i<64; i++){
     activeArray[i]=0;
   }
-	for (int i = 0; i < 64; i++) {
-		pieceArray[i] = new Piece();
-	}
   moveNumber = 0;
 };
 
@@ -213,40 +210,40 @@ int Board::getMoveNumber(){
   return moveNumber;
 }
 
-// Gives access to the activeArray, a 64-long boolean array which records if squares have pieces on them.
-bool* Board::getActiveArray(){
-	return activeArray;
-}
-
-Piece** Board::getPieceArray(){
-	return pieceArray;
-}
-
 //Returns 0 if no check, 1 if white, 2 if black and 3 if both
 int Board::checkCheck(bool isWhiteTurn) {
 
-	// bool* actArr = board->getActiveArray();
-	// Piece** pieceArr = board->getPieceArray();
+	//Declaring variables
+	bool whiteInCheck = 0;
+	bool blackInCheck = 0;
 
-  int kingSquare = 300;
+  int kingSquare, kingRow, kingCol;
+
+	int edges[4];					//Array of squares at the edge of board that could be attacking king, 0-3, anticlockwise starting east
+	int pieceSquares[4];	//Array of squares with pieces, -1 if no piece
+
+	//Increments for king row and column
+	int kingRowIncr;
+	int kingColIncr;
+
+	//Squares that knighs could be on
+	int knightSquares[8] = {17,10,-6,-15,-17,-10,6,15};
 
 	//WHITE KING
 
 	//Find what square the king is on
-	for (int i = 0; i < 63; i++) {
-		if (pieceArray[i]->getType() == 'k') {
-			kingSquare = i;
-			break;
+	for (int i = 0; i < 64; i++) {
+		if (activeArray[i]) {
+			if (pieceArray[i]->getType() == 'k' && pieceArray[i]->getIsWhite()) {
+				kingSquare = i;
+				break;
+			}
 		}
 	}
 
-	std::cout << kingSquare;
-
 	//Find straight destinations
-	int edges[4];		//Array of squares at the edge of board that could be attacking king, 0-3, anticlockwise starting east
-
-	int kingRow = row(kingSquare);
-	int kingCol = col(kingSquare);
+	kingRow = row(kingSquare);
+	kingCol = col(kingSquare);
 
 	edges[0] = 56 + kingRow;
 	edges[1] = (8 * kingCol) + 7;
@@ -254,74 +251,261 @@ int Board::checkCheck(bool isWhiteTurn) {
 	edges[3] = 8 * kingCol;
 
 	//Find if pieces are on squares
-	int pieceSquares[4];
 	for (int i = 0; i < 4; i++) {
 		pieceSquares[i] = pieceArray[kingSquare]->checkStraight(edges[i], activeArray);
+		//If there is a piece at the edge
+		if (pieceSquares[i] >= 100) {
+			pieceSquares[i] -= 100;
+		}
 	}
 
 	//Check squares
 	for (int i = 0; i < 4; i++) {
 		if (pieceSquares[i] != -1) {
-			//If the piece is a black rook, queen or king
-			if (pieceArray[pieceSquares[i]]->getType() == 'r' || pieceArray[pieceSquares[i]]->getType() == 'q') {
-				return 1;
+			//If the piece is a black rook or queen
+			if (strcmp(getPiece(pieceSquares[i]), u8"\u265C") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u265B") == 0) {
+				whiteInCheck = 1;
+				std::cout << "5\n";
+			} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"\u265A") == 0) {	//If the piece is a black king and within 1 square of the white king
+				whiteInCheck = 1;
+				blackInCheck = 1;
+				std::cout << "4\n";
 			}
 		}
 	}
 
-	//Find diagonal destinations - edges now 0-3, anticlockwise starting north-east
+	if (!whiteInCheck && !blackInCheck) {
+		//Find diagonal destinations - edges now 0-3, anticlockwise starting north-east
 
-	/*
-	int kingRowIncr = kingRow;
-	int kingColIncr = kingCol;
+		kingRowIncr = kingRow;
+		kingColIncr = kingCol;
 
-	while (kingRowIncr < 8 && kingColIncr < 8) {
-		kingRowIncr++;
-		kingColIncr++;
-	}
+		while (kingRowIncr < 7 && kingColIncr < 7) {
+			kingRowIncr++;
+			kingColIncr++;
+		}
 
-	edges[0] = (kingColIncr * 8) + kingRowIncr;
+		edges[0] = (kingColIncr * 8) + kingRowIncr;
 
-	while (kingRowIncr < 8 && kingColIncr > -1) {
-		kingRowIncr++;
-		kingColIncr--;
-	}
+		kingRowIncr = kingRow;
+		kingColIncr = kingCol;
 
-	edges[1] = (kingColIncr * 8) + kingRowIncr;
+		while (kingRowIncr < 7 && kingColIncr > 0) {
+			kingRowIncr++;
+			kingColIncr--;
+		}
 
-	while (kingRowIncr > -1 && kingColIncr > -1) {
-		kingRowIncr--;
-		kingColIncr--;
-	}
+		edges[1] = (kingColIncr * 8) + kingRowIncr;
 
-	edges[2] = (kingColIncr * 8) + kingRowIncr;
+		kingRowIncr = kingRow;
+		kingColIncr = kingCol;
 
-	while (kingRowIncr > -1 && kingColIncr < 8) {
-		kingRowIncr--;
-		kingColIncr++;
-	}
+		while (kingRowIncr > 0 && kingColIncr > 0) {
+			kingRowIncr--;
+			kingColIncr--;
+		}
 
-	edges[3] = (kingColIncr * 8) + kingRowIncr;
+		edges[2] = (kingColIncr * 8) + kingRowIncr;
 
-	//Find if pieces are on squares
-	pieceSquares[4];
-	for (int i = 0; i < 4; i++) {
-		pieceSquares[i] = pieceArr[kingSquare]->checkStraight(edges[i], actArr);
-	}
+		kingRowIncr = kingRow;
+		kingColIncr = kingCol;
 
-	//Check squares
-	for (int i = 0; i < 4; i++) {
-		if (pieceSquares[i] != -1) {
-			//If the piece is a black bishop, queen, king or (pawn that is above white king on board)
-			if (board->getPiece(pieceSquares[i]) == u8"\u265D" || board->getPiece(pieceSquares[i]) == u8"\u265B" || board->getPiece(pieceSquares[i]) == u8"\u265A" || (board->getPiece(pieceSquares[i]) == u8"\u265F" && row(pieceSquares[i]) > kingRow)) {
-				return 1;
+		while (kingRowIncr > 0 && kingColIncr < 7) {
+			kingRowIncr--;
+			kingColIncr++;
+		}
+
+		edges[3] = (kingColIncr * 8) + kingRowIncr;
+
+		//Find if pieces are on squares
+		for (int i = 0; i < 4; i++) {
+			pieceSquares[i] = pieceArray[kingSquare]->checkDiagonal(edges[i], activeArray);
+			if (pieceSquares[i] >= 100) {
+				pieceSquares[i] -= 100;
+			}
+		}
+		//Check squares
+		for (int i = 0; i < 4; i++) {
+			if (pieceSquares[i] != -1) {
+				//If the piece is a black bishop, queen or a pawn that is above white king on board
+				if (strcmp(getPiece(pieceSquares[i]), u8"\u265D") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u265B") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u265F") == 0 && row(pieceSquares[i]) > kingRow)) {
+					whiteInCheck = 1;
+					std::cout << "3\n";
+				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"\u265A") == 0) {	//If the piece is a black king and within 1 square of the white king
+					whiteInCheck = 1;
+					blackInCheck = 1;
+					std::cout << "2\n";
+				}
 			}
 		}
 	}
-	*/
 
-	// int knightSquares[8] = {kingSquare+17,kingSquare+10,kingSquare-6,kingSquare-15,}
+	if (!whiteInCheck && !blackInCheck) {
 
+		for (int i = 0; i < 8; i++) {
+			knightSquares[i] += kingSquare;
+		}
+
+		for (int i = 0; i < 8; i++) {
+			//If knightSquares[i] is an actual square
+			if (knightSquares[i] >= 0 && knightSquares[i] <= 63) {
+				//If there is a piece on knightSquares[i]
+				if (activeArray[knightSquares[i]]) {
+					//If the piece is a black knight and the within a radius of 2 squares from the king
+					if (strcmp(getPiece(knightSquares[i]), u8"\u265E") == 0 && (abs(kingRow - row(knightSquares[i])) <= 2 && abs(kingCol - col(knightSquares[i])) <= 2)) {
+						whiteInCheck = 1;
+						std::cout << "1\n";
+					}
+				}
+			}
+		}
+	}
+
+	//BLACK KING
+
+	//Find what square the king is on
+	for (int i = 0; i < 63; i++) {
+		if (activeArray[i]) {
+			if (pieceArray[i]->getType() == 'k' && !pieceArray[i]->getIsWhite()) {
+				kingSquare = i;
+				break;
+			}
+		}
+	}
+
+	kingRow = row(kingSquare);
+	kingCol = col(kingSquare);
+
+	if (!whiteInCheck && !blackInCheck) {
+
+		//Find straight destinations
+		edges[0] = 56 + kingRow;
+		edges[1] = (8 * kingCol) + 7;
+		edges[2] = 0 + kingRow;
+		edges[3] = 8 * kingCol;
+
+		//Find if pieces are on squares
+		for (int i = 0; i < 4; i++) {
+			pieceSquares[i] = pieceArray[kingSquare]->checkStraight(edges[i], activeArray);
+			//If there is a piece at the edge
+			if (pieceSquares[i] >= 100) {
+				pieceSquares[i] -= 100;
+			}
+		}
+
+		//Check squares
+		for (int i = 0; i < 4; i++) {
+			if (pieceSquares[i] != -1) {
+				//If the piece is a white rook or queen
+				if (strcmp(getPiece(pieceSquares[i]), u8"\u2656") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0) {
+					blackInCheck = 1;
+					std::cout << "6\n";
+				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"♔") == 0) {	//If the piece is a white king and within 1 square of the black king
+					whiteInCheck = 1;
+					blackInCheck = 1;
+					std::cout << "7\n";
+				}
+			}
+		}
+	}
+
+	if (!whiteInCheck && !blackInCheck) {
+
+		//Find diagonal destinations - edges now 0-3, anticlockwise starting north-east
+
+		kingRowIncr = kingRow;
+		kingColIncr = kingCol;
+
+		while (kingRowIncr < 7 && kingColIncr < 7) {
+			kingRowIncr++;
+			kingColIncr++;
+		}
+
+		edges[0] = (kingColIncr * 8) + kingRowIncr;
+
+		kingRowIncr = kingRow;
+		kingColIncr = kingCol;
+
+		while (kingRowIncr < 7 && kingColIncr > 0) {
+			kingRowIncr++;
+			kingColIncr--;
+		}
+
+		edges[1] = (kingColIncr * 8) + kingRowIncr;
+
+		kingRowIncr = kingRow;
+		kingColIncr = kingCol;
+
+		while (kingRowIncr > 0 && kingColIncr > 0) {
+			kingRowIncr--;
+			kingColIncr--;
+		}
+
+		edges[2] = (kingColIncr * 8) + kingRowIncr;
+
+		kingRowIncr = kingRow;
+		kingColIncr = kingCol;
+
+		while (kingRowIncr > 0 && kingColIncr < 7) {
+			kingRowIncr--;
+			kingColIncr++;
+		}
+
+		edges[3] = (kingColIncr * 8) + kingRowIncr;
+
+		//Find if pieces are on squares
+		for (int i = 0; i < 4; i++) {
+			pieceSquares[i] = pieceArray[kingSquare]->checkDiagonal(edges[i], activeArray);
+			if (pieceSquares[i] >= 100) {
+				pieceSquares[i] -= 100;
+			}
+		}
+		std::cout << kingSquare << "\n";
+		//Check squares
+		for (int i = 0; i < 4; i++) {
+			std::cout << pieceSquares[i] << "\n";
+			if (pieceSquares[i] != -1) {
+				//If the piece is a white bishop, queen or a pawn that is above black king on board
+				if (strcmp(getPiece(pieceSquares[i]), u8"\u2657") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u2659") == 0 && row(pieceSquares[i]) > kingRow)) {
+					blackInCheck = 1;
+					std::cout << "8\n";
+				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"♔") == 0) {	//If the piece is a white king and within 1 square of the black king
+					whiteInCheck = 1;
+					blackInCheck = 1;
+					std::cout << "9\n";
+				}
+			}
+		}
+	}
+
+	if (!whiteInCheck && !blackInCheck) {
+
+		for (int i = 0; i < 8; i++) {
+			knightSquares[i] += kingSquare;
+		}
+
+		for (int i = 0; i < 8; i++) {
+			//If knightSquares[i] is an actual square
+			if (knightSquares[i] >= 0 && knightSquares[i] <= 63) {
+				//If there is a piece on knightSquares[i]
+				if (activeArray[knightSquares[i]]) {
+					//If the piece is a white knight and the within a radius of 2 squares from the king
+					if (strcmp(getPiece(knightSquares[i]), u8"\u2658") == 0 && (abs(kingRow - row(knightSquares[i])) <= 2 && abs(kingCol - col(knightSquares[i])) <= 2)) {
+						blackInCheck = 1;
+						std::cout << "10\n";
+					}
+				}
+			}
+		}
+	}
+
+	if (whiteInCheck && blackInCheck) {
+		return 3;
+	} else if (blackInCheck) {
+		return 2;
+	} else if (whiteInCheck) {
+		return 1;
+	}
   return 0;
 }
 

@@ -9,7 +9,7 @@ using std::string;
 #include "Board.h"
 
 extern int setup(Board* gameBoard);
-extern int setupTestCheck(Board* gameBoard);
+extern int setupchecktest(Board* gameBoard);
 extern int inputFunc();
 extern int draw(Board* gameBoard, bool isWhiteTurn);
 extern int check(Board* board, bool isWhiteTurn);
@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
   int gameEnd = 0;
   // Setup a game
   Board* gameBoard = new Board();
-  setupTestCheck(gameBoard);
+  setupchecktest(gameBoard);
 
 	//Records if a player has used a cheat code
 	bool whiteCheat = 0;
@@ -101,10 +101,8 @@ int main(int argc, char const *argv[]) {
 
 			inCheck = gameBoard->checkCheck(whiteTurn);
 
-			switch (inCheck) {
-				case 1:
-					success = 0;
-					break;
+			if ((whiteTurn && (inCheck == 1 || inCheck == 3)) || (!whiteTurn && (inCheck == 2 || inCheck == 3))) {
+				success = 0;
 			}
 
       if (success != 1){

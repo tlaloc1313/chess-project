@@ -53,31 +53,31 @@ int setup(Board* gameBoard) {
 return 0;
 }
 
-int setupTestCheck(Board* gameBoard) {
+int setupchecktest(Board* gameBoard) {
   //White Pawns
-  // gameBoard->addPiece('p', 1, 1);
+  // gameBoard->addPiece('p', 12, 1);
 
   //Black Pawns
-  // gameBoard->addPiece('p', 6, 0);
+  // gameBoard->addPiece('p', 27, 0);
 
   //Rooks
   // gameBoard->addPiece('r', 0, 1);
-  gameBoard->addPiece('r', 8, 0);
+  // gameBoard->addPiece('r', 0, 0);
 
   //Bishops
   // gameBoard->addPiece('b', 16, 1);
-  // gameBoard->addPiece('b', 23, 0);
+  // gameBoard->addPiece('b', 16, 0);
 
   //Knights - note 'n' as type
   // gameBoard->addPiece('n', 8, 1);
-  // gameBoard->addPiece('n', 15, 0);
+  // gameBoard->addPiece('n', 44, 0);
 
   //Kings - note 'k' as type
-  gameBoard->addPiece('k', 33, 1);
-  // gameBoard->addPiece('k', 39, 0);
+  gameBoard->addPiece('k', 55, 1);
+  gameBoard->addPiece('k', 18, 0);
 
   //Queens
-  // gameBoard->addPiece('q', 24, 1);
-  // gameBoard->addPiece('q', 31, 0);
+  gameBoard->addPiece('q', 24, 1);
+  // gameBoard->addPiece('q', 58, 0);
 return 0;
 }
