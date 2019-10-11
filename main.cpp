@@ -41,7 +41,8 @@ int main(int argc, char const *argv[]) {
     //50 Move Rules
     if (gameBoard->getMovesSince()>100){
       cout << "50 Move Rule - Game is Drawn\n";
-      return 0;
+      gameEnd = 3;
+      break;
     }
 
     draw(gameBoard, whiteTurn);
