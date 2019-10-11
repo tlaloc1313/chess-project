@@ -7,6 +7,7 @@
 #include <string.h>
 
 //Returns 0 if no check, 1 if white, 2 if black and 3 if both
+
 int check(Board* board, bool isWhiteTurn) {
 
 	bool* actArr = board->getActiveArray();

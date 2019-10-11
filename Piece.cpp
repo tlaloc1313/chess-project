@@ -37,75 +37,90 @@ int Piece::direction(int destination){
 }
 
 //Iterates along the direction to be moved, if a piece is found, the square is returned, otherwise returns -1
+//If there is a piece at destination, that square+100 is returned
 int Piece::checkStraight(int destination, bool activeArray[64]) {
 	int dir = direction(destination);
 
+	int e,n,w,s;
+
 	switch (dir) {
 		case 0: //East
-			for (int i = location+8; i < destination; i+=8) {
-				if (activeArray[i] == 1) {
-					return i;
+			for (e = location+8; e < destination; e+=8) {
+				if (activeArray[e] == 1) {
+					return e;
 				}
 			}
 			break;
 		case 2: //North
-			for (int i = location+1; i < destination; i++) {
-				if (activeArray[i] == 1) {
-					return i;
+			for (n = location+1; n < destination; n++) {
+				if (activeArray[n] == 1) {
+					return n;
 				}
 			}
 			break;
 		case 4: //West
-			for (int i = location-8; i > destination; i-=8) {
-				if (activeArray[i] == 1) {
-					return i;
+			for (w = location-8; w > destination; w-=8) {
+				if (activeArray[w] == 1) {
+					return w;
 				}
 			}
 			break;
 		case 6: //South
-			for (int i = location-1; i > destination; i--) {
-				if (activeArray[i] == 1) {
-					return i;
+			for (s = location-1; s > destination; s--) {
+				if (activeArray[s] == 1) {
+					return s;
 				}
 			}
 			break;
 	}
+
+	if (activeArray[destination] == 1) {
+		return destination + 100;
+	}
+
 	return -1;
 }
 
+//Iterates along the direction to be moved, if a piece is found, the square is returned, otherwise returns -1
+//If there is a piece at destination, that square+100 is returned
 int Piece::checkDiagonal(int destination, bool activeArray[64]) {
 	int dir = direction(destination);
 
 	switch (dir) {
 		case 1: //North East
-			for (int i = location+9; i < destination; i+=9) {
-				if (activeArray[i] == 1) {
-					return i;
+			for (int ne = location+9; ne < destination; ne+=9) {
+				if (activeArray[ne] == 1) {
+					return ne;
 				}
 			}
 			break;
 		case 3: //North West
-			for (int i = location-7; i > destination; i-=7) {
-				if (activeArray[i] == 1) {
-					return i;
+			for (int nw = location-7; nw > destination; nw-=7) {
+				if (activeArray[nw] == 1) {
+					return nw;
 				}
 			}
 			break;
 		case 5: //South West
-			for (int i = location-9; i > destination; i-=9) {
-				if (activeArray[i] == 1) {
-					return i;
+			for (int sw = location-9; sw > destination; sw-=9) {
+				if (activeArray[sw] == 1) {
+					return sw;
 				}
 			}
 			break;
 		case 7: //South East
-			for (int i = location+7; i < destination; i+=7) {
-				if (activeArray[i] == 1) {
-					return i;
+			for (int se = location+7; se < destination; se+=7) {
+				if (activeArray[se] == 1) {
+					return se;
 				}
 			}
 			break;
 	}
+
+	if (activeArray[destination] == 1) {
+		return destination + 100;
+	}
+
 	return -1;
 }
 

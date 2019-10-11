@@ -10,11 +10,11 @@
 //movement of pieces and creation/deletion of piece objects.
 class Board {
 private:
+	Piece* pieceArray[64]; //Array of pieces corresponding to squares
   bool activeArray[64]; //Tracks if a square has a piece
   std::vector<char> pastPieces;
   std::vector<int> pastMoves;
   int moveNumber;
-  Piece* pieceArray[64]; //Array of pieces corresponding to squares
   int movesSince; //Records how many moves have elapsed since a pawn move or a capture
 
 public:
@@ -24,8 +24,6 @@ public:
   const char* getPastPiece(int number);
   std::string getPastSquare(int number);
   int getMoveNumber();
-	Piece** getPieceArray();
-	bool* getActiveArray();
 	int checkCheck(bool isWhiteTurn);
   int castle(int castleColour, int castleKingSide);
   int getMovesSince();
