@@ -44,5 +44,4 @@ int King::castle(int square){
 
 //Basic destructor for King subclass.
 King::~King(){
-  std::cout << "This should never have been allowed to happen." << '\n';
 }

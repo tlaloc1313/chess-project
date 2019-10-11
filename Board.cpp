@@ -426,5 +426,7 @@ int Board::getMovesSince(){
 
 //Destructor has no specific behaviour
 Board::~Board(){
-
+ for (int i = 0; i < 64; i++) {
+     delete pieceArray[i];
+ }
 }

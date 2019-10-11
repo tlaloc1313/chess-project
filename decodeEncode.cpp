@@ -37,6 +37,15 @@ int inputFunc(void) {
       return 69;
     }
 
+    //Checks for resignation
+    if ( (input.compare("resign") == 0) || (input.compare("Resign")) == 0 || (input.compare("RESIGN")) == 0 ){
+      return 800;
+    }
+
+    if ( (input.compare("offerdraw") == 0) || (input.compare("Offerdraw")) == 0 || (input.compare("OfferDraw")) == 0 || (input.compare("OFFERDRAW")) == 0 ){
+      return 801;
+    }
+
 		//Checks that the input is the correct length
 		if (input.length() != 2) {
 			cout << INVSQUARE;

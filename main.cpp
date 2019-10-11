@@ -25,6 +25,7 @@ int main(int argc, char const *argv[]) {
   //Set first turn to white
   bool whiteTurn=1;
   int gameEnd = 0;
+  char drawAccept = ' ';
   // Setup a game
   Board* gameBoard = new Board();
   setup(gameBoard);
@@ -95,6 +96,41 @@ int main(int argc, char const *argv[]) {
 				}
 			}
 
+      //Resignation or Draw Offers:
+      if (startPos == 800){ //Resignation
+        if (whiteTurn){
+          cout << "Black wins by resignation!\n";
+          gameEnd = 2;
+        } else {
+          cout << "White wins by resignation!\n";
+          gameEnd =  1;
+        }
+        break;
+      }
+      if (startPos == 801){ // Draw offer
+        if (whiteTurn){
+          cout << "White offers a draw. Black, do you accept? (y/n) ";
+          cin >> drawAccept;
+          if (drawAccept == 'y'){
+            cout << "The game is drawn!\n";
+            gameEnd = 3;
+            break;
+          } else {
+            continue;
+          }
+        } else {
+          cout << "Black offers a draw. White, do you accept? (y/n) ";
+          cin >> drawAccept;
+          if (drawAccept == 'y'){
+            cout << "The game is drawn!\n";
+            gameEnd = 3;
+            break;
+          } else {
+            continue;
+          }
+        }
+      }
+
       cout << "To: ";
       int endPos = inputFunc();
 
@@ -142,5 +178,7 @@ int main(int argc, char const *argv[]) {
     }
     whiteTurn= !whiteTurn;
   }
+
+  delete gameBoard;
   return 0;
 }
