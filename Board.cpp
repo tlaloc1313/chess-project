@@ -325,6 +325,10 @@ int Board::checkCheck(bool isWhiteTurn) {
   return 0;
 }
 
+int Board::castle (int castleType){
+  return 0;
+}
+
 //Destructor has no specific behaviour
 Board::~Board(){
 

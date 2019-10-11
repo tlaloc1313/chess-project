@@ -93,43 +93,41 @@ int main(int argc, char const *argv[]) {
 
       //CASTLING
       if (startPos == 69) {
+        success = 0; //Castling fails by default
+
         switch (endPos){
 
           //White castling queenside
           case 8:
             if (whiteTurn == 0){
-              break;
+              success = gameBoard->castle(1);
             }
-
           break;
 
           //Black castling queenside
           case 15:
             if (whiteTurn == 1){
-              break;
+              success = gameBoard->castle(2);
             }
-
           break;
 
           //White castling kingside
           case 48:
             if (whiteTurn == 0){
-              break;
+              success = gameBoard->castle(3);
             }
-
           break;
 
           //Black castling kingside
           case 55:
             if (whiteTurn == 1){
-              break;
+              success = gameBoard->castle(4);
             }
-
           break;
         }
-      }
-
-      success = gameBoard->movePiece(startPos, endPos, whiteTurn);
+      } else { //If no special move is being made, attempt to make normal move
+          success = gameBoard->movePiece(startPos, endPos, whiteTurn);
+          }
 
       if (success != 1){
         std::cout << "Invalid Move" << '\n';

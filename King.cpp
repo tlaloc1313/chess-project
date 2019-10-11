@@ -32,6 +32,16 @@ bool King::move(int square, bool activeArray[64]){
   return 0;
 }
 
+//Given a destination square, the king attempts to castle. Returns 0 on success.
+int King::castle(int square){
+  if (hasMoved == 0){
+    location = square;
+    hasMoved = 1;
+    return 0;
+  }
+  return -1;
+}
+
 //Basic destructor for King subclass.
 King::~King(){
   std::cout << "This should never have been allowed to happen." << '\n';
