@@ -11,7 +11,7 @@ using std::string;
 extern int setup(Board* gameBoard);
 extern int inputFunc();
 extern int draw(Board* gameBoard, bool isWhiteTurn);
-extern int checkCheck(Board* board, bool isWhiteTurn);
+// extern int checkCheck(Board* board, bool isWhiteTurn);
 
 int main(int argc, char const *argv[]) {
 
@@ -34,7 +34,7 @@ int main(int argc, char const *argv[]) {
 	bool whiteCheat = 0;
 	bool blackCheat = 0;
 
-	// int inCheck = 0;
+	int inCheck = 0;
 
   while (gameEnd == 0){
 
@@ -170,8 +170,14 @@ int main(int argc, char const *argv[]) {
           break;
         }
       } else { //If no special move is being made, attempt to make normal move
-          success = gameBoard->movePiece(startPos, endPos, whiteTurn);
-          }
+				success = gameBoard->movePiece(startPos, endPos, whiteTurn);
+				inCheck = gameBoard->checkCheck(whiteTurn);
+
+				if ((whiteTurn && (inCheck == 1 || inCheck == 3)) || (!whiteTurn && (inCheck == 2 || inCheck == 3))) {
+					gameBoard->movePiece(endPos, startPos, whiteTurn);
+					success = 0;
+				}
+      }
 
       if (success != 1){
         std::cout << "Invalid Move" << '\n';

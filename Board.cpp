@@ -282,11 +282,11 @@ int Board::checkCheck(bool isWhiteTurn) {
 			//If the piece is a black rook or queen
 			if (strcmp(getPiece(pieceSquares[i]), u8"\u265C") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u265B") == 0) {
 				whiteInCheck = 1;
-				std::cout << "5\n";
+				// std::cout << "1\n";
 			} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"\u265A") == 0) {	//If the piece is a black king and within 1 square of the white king
 				whiteInCheck = 1;
 				blackInCheck = 1;
-				std::cout << "4\n";
+				// std::cout << "2\n";
 			}
 		}
 	}
@@ -347,11 +347,11 @@ int Board::checkCheck(bool isWhiteTurn) {
 				//If the piece is a black bishop, queen or a pawn that is above white king on board
 				if (strcmp(getPiece(pieceSquares[i]), u8"\u265D") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u265B") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u265F") == 0 && row(pieceSquares[i]) > kingRow)) {
 					whiteInCheck = 1;
-					std::cout << "3\n";
+					// std::cout << "3\n";
 				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"\u265A") == 0) {	//If the piece is a black king and within 1 square of the white king
 					whiteInCheck = 1;
 					blackInCheck = 1;
-					std::cout << "2\n";
+					// std::cout << "4\n";
 				}
 			}
 		}
@@ -371,7 +371,7 @@ int Board::checkCheck(bool isWhiteTurn) {
 					//If the piece is a black knight and the within a radius of 2 squares from the king
 					if (strcmp(getPiece(knightSquares[i]), u8"\u265E") == 0 && (abs(kingRow - row(knightSquares[i])) <= 2 && abs(kingCol - col(knightSquares[i])) <= 2)) {
 						whiteInCheck = 1;
-						std::cout << "1\n";
+						// std::cout << "5\n";
 					}
 				}
 			}
@@ -416,11 +416,11 @@ int Board::checkCheck(bool isWhiteTurn) {
 				//If the piece is a white rook or queen
 				if (strcmp(getPiece(pieceSquares[i]), u8"\u2656") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0) {
 					blackInCheck = 1;
-					std::cout << "6\n";
+					// std::cout << "6\n";
 				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"♔") == 0) {	//If the piece is a white king and within 1 square of the black king
 					whiteInCheck = 1;
 					blackInCheck = 1;
-					std::cout << "7\n";
+					// std::cout << "7\n";
 				}
 			}
 		}
@@ -477,19 +477,17 @@ int Board::checkCheck(bool isWhiteTurn) {
 				pieceSquares[i] -= 100;
 			}
 		}
-		std::cout << kingSquare << "\n";
 		//Check squares
 		for (int i = 0; i < 4; i++) {
-			std::cout << pieceSquares[i] << "\n";
 			if (pieceSquares[i] != -1) {
-				//If the piece is a white bishop, queen or a pawn that is above black king on board
-				if (strcmp(getPiece(pieceSquares[i]), u8"\u2657") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u2659") == 0 && row(pieceSquares[i]) > kingRow)) {
+				//If the piece is a white bishop, queen or a pawn that is below black king on board
+				if (strcmp(getPiece(pieceSquares[i]), u8"\u2657") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u2659") == 0 && row(pieceSquares[i]) < kingRow)) {
 					blackInCheck = 1;
-					std::cout << "8\n";
+					// std::cout << "8\n";
 				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"♔") == 0) {	//If the piece is a white king and within 1 square of the black king
 					whiteInCheck = 1;
 					blackInCheck = 1;
-					std::cout << "9\n";
+					// std::cout << "9\n";
 				}
 			}
 		}
@@ -509,7 +507,7 @@ int Board::checkCheck(bool isWhiteTurn) {
 					//If the piece is a white knight and the within a radius of 2 squares from the king
 					if (strcmp(getPiece(knightSquares[i]), u8"\u2658") == 0 && (abs(kingRow - row(knightSquares[i])) <= 2 && abs(kingCol - col(knightSquares[i])) <= 2)) {
 						blackInCheck = 1;
-						std::cout << "10\n";
+						// std::cout << "10\n";
 					}
 				}
 			}

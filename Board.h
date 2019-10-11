@@ -15,7 +15,6 @@ private:
   std::vector<char> pastPieces;
   std::vector<int> pastMoves;
   int moveNumber;
-  Piece* pieceArray[64]; //Array of pieces corresponding to squares
   int movesSince; //Records how many moves have elapsed since a pawn move or a capture
 
 public:

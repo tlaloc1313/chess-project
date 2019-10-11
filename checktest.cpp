@@ -35,7 +35,6 @@ int main(int argc, char const *argv[]) {
 	bool blackCheat = 0;
 
 	int inCheck = 0;
-	int copySuccess = 0;
 
   while (gameEnd == 0){
     draw(gameBoard, whiteTurn);
@@ -93,15 +92,11 @@ int main(int argc, char const *argv[]) {
       cout << "To: ";
       int endPos = inputFunc();
 
-			Board* gameBoardCopy = new Board();
-			*gameBoardCopy = *gameBoard;
-
-			success = gameBoard->movePiece(startPos, endPos, whiteTurn);
-			copySuccess = gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
-
+			gameBoard->movePiece(startPos, endPos, whiteTurn);
 			inCheck = gameBoard->checkCheck(whiteTurn);
 
 			if ((whiteTurn && (inCheck == 1 || inCheck == 3)) || (!whiteTurn && (inCheck == 2 || inCheck == 3))) {
+				gameBoard->movePiece(endPos, startPos, whiteTurn);
 				success = 0;
 			}
 

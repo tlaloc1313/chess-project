@@ -78,6 +78,6 @@ int setupchecktest(Board* gameBoard) {
 
   //Queens
   gameBoard->addPiece('q', 24, 1);
-  // gameBoard->addPiece('q', 58, 0);
+  gameBoard->addPiece('q', 6, 0);
 return 0;
 }
