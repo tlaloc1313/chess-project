@@ -22,6 +22,10 @@ void drawMoves(Board* gameBoard){
 
   //Loops from start to current point in game.
   for (int i = 0; i < gameBoard->getMoveNumber(); i++){
+    if (i%2 == 0){
+      cout << (i/2)+1 << ". ";
+    }
+
     cout << gameBoard->getPastPiece(i) << gameBoard->getPastSquare(i) << "  ";
   }
   cout << "\n\n";
