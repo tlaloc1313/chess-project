@@ -5,12 +5,12 @@ using std::wcout;
 
 //Defines the horizontal spacing between columns
 #ifndef SPACINGH
-#define SPACINGH "   "
+#define SPACINGH " "
 #endif
 
 //Defines the vertical spacing between rows
 #ifndef SPACINGV
-#define SPACINGV "\n\n"
+#define SPACINGV "\n"
 #endif
 
 #include "Board.h"
