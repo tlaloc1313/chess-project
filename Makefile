@@ -28,8 +28,5 @@ Rook.o: Rook.cpp Rook.h Piece.h
 Board.o: Board.cpp Board.h
 	$(CXX) -c Board.cpp -o Board.o
 
-Piecetest: Pawn.o Bishop.o Rook.o Knight.o Piece.o King.cpp piecetest.cpp decodeEncode.cpp Queen.o position.cpp
-	$(CXX) piecetest.cpp position.cpp Pawn.o Piece.o King.cpp Bishop.o Knight.o Rook.o Queen.o decodeEncode.cpp -o Piecetest
-
 Checktest: checktest.cpp draw.cpp setup.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o
 	$(CXX) checktest.cpp draw.cpp setup.cpp decodeEncode.cpp position.cpp Board.o Bishop.o King.o Knight.o Pawn.o Piece.o Queen.o Rook.o -o Checktest
