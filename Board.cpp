@@ -13,6 +13,29 @@ Board::Board(){
   movesSince = 0;
 };
 
+//Constructor for use when copying Board objects
+Board::Board (Piece** pieceArr, bool activeArr[64], std::vector<char> pstPcs, std::vector<int> pstMvs){
+	for (int i = 0; i < 64; i++) {
+		if (activeArr[i]) {
+			addPiece(pieceArr[i]->getType(), pieceArr[i]->getPosition(), pieceArr[i]->getIsWhite());
+		}
+	}
+	for (unsigned i = 0; i < pstPcs.size(); i++) {
+		pastPieces.push_back(pstPcs.at(i));
+	}
+	for (unsigned i = 0; i < pstMvs.size(); i++) {
+		pastMoves.push_back(pstMvs.at(i));
+	}
+	// for (std::vector<char> it = pstPcs.begin(); it != pstPcs.end(); it++) {
+	// 	pastPieces.push_back(*it);
+	// }
+	// for (std::vector<int> it = pstMvs.begin(); it != pstMvs.end(); it++) {
+	// 	pastMoves.push_back(*it);
+	// }
+	moveNumber = 0;
+  movesSince = 0;
+}
+
 //Checks if a space on the board is occupied
 bool Board::spaceOccupied(int space){
   if (activeArray[space] == 0){
@@ -45,6 +68,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
       return -1;
     }
   }
+
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
 
   //Checking for the en passant rule:
@@ -58,7 +82,9 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     }
   }
 
-  int success = pieceArray[startSpace]->move(endSpace, activeArray);
+	//This line causes a seg fault the 2nd time checkCheck is run if gameBoardCopy is deleted and I have no idea why - the issue seems to be the call itself, it doesn't actually run any of the function
+  bool success = pieceArray[startSpace]->move(endSpace, activeArray);
+
   if (success == 1){
     pieceTaken = 0;
     if (spaceWasOccupied == 1){//If a piece is being taken, deletes that piece and resets 50 moves
@@ -244,7 +270,7 @@ int Board::getMoveNumber(){
 }
 
 //Returns 0 if no check, 1 if white, 2 if black and 3 if both
-int Board::checkCheck(bool isWhiteTurn) {
+int Board::checkCheck() {
 
 	//Declaring variables
 	bool whiteInCheck = 0;
@@ -286,9 +312,11 @@ int Board::checkCheck(bool isWhiteTurn) {
 	//Find if pieces are on squares
 	for (int i = 0; i < 4; i++) {
 		pieceSquares[i] = pieceArray[kingSquare]->checkStraight(edges[i], activeArray);
-		//If there is a piece at the edge
-		if (pieceSquares[i] >= 100) {
-			pieceSquares[i] -= 100;
+		//checkStraight ignores the final square, so if it doesn't find anything, edges[i] is checked as well
+		if (pieceSquares[i] == -1) {
+			if (activeArray[edges[i]] == 1) {
+				pieceSquares[i] = edges[i];
+			}
 		}
 	}
 
@@ -298,11 +326,9 @@ int Board::checkCheck(bool isWhiteTurn) {
 			//If the piece is a black rook or queen
 			if (strcmp(getPiece(pieceSquares[i]), u8"\u265C") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u265B") == 0) {
 				whiteInCheck = 1;
-				// std::cout << "1\n";
 			} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"\u265A") == 0) {	//If the piece is a black king and within 1 square of the white king
 				whiteInCheck = 1;
 				blackInCheck = 1;
-				// std::cout << "2\n";
 			}
 		}
 	}
@@ -353,21 +379,23 @@ int Board::checkCheck(bool isWhiteTurn) {
 		//Find if pieces are on squares
 		for (int i = 0; i < 4; i++) {
 			pieceSquares[i] = pieceArray[kingSquare]->checkDiagonal(edges[i], activeArray);
-			if (pieceSquares[i] >= 100) {
-				pieceSquares[i] -= 100;
+			//checkDiagonal ignores the final square, so if it doesn't find anything, edges[i] is checked as well
+			if (pieceSquares[i] == -1) {
+				if (activeArray[edges[i]] == 1) {
+					pieceSquares[i] = edges[i];
+				}
 			}
 		}
+
 		//Check squares
 		for (int i = 0; i < 4; i++) {
 			if (pieceSquares[i] != -1) {
 				//If the piece is a black bishop, queen or a pawn that is above white king on board
 				if (strcmp(getPiece(pieceSquares[i]), u8"\u265D") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u265B") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u265F") == 0 && row(pieceSquares[i]) > kingRow)) {
 					whiteInCheck = 1;
-					// std::cout << "3\n";
 				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"\u265A") == 0) {	//If the piece is a black king and within 1 square of the white king
 					whiteInCheck = 1;
 					blackInCheck = 1;
-					// std::cout << "4\n";
 				}
 			}
 		}
@@ -387,7 +415,6 @@ int Board::checkCheck(bool isWhiteTurn) {
 					//If the piece is a black knight and the within a radius of 2 squares from the king
 					if (strcmp(getPiece(knightSquares[i]), u8"\u265E") == 0 && (abs(kingRow - row(knightSquares[i])) <= 2 && abs(kingCol - col(knightSquares[i])) <= 2)) {
 						whiteInCheck = 1;
-						// std::cout << "5\n";
 					}
 				}
 			}
@@ -420,9 +447,11 @@ int Board::checkCheck(bool isWhiteTurn) {
 		//Find if pieces are on squares
 		for (int i = 0; i < 4; i++) {
 			pieceSquares[i] = pieceArray[kingSquare]->checkStraight(edges[i], activeArray);
-			//If there is a piece at the edge
-			if (pieceSquares[i] >= 100) {
-				pieceSquares[i] -= 100;
+			//checkStraight ignores the final square, so if it doesn't find anything, edges[i] is checked as well
+			if (pieceSquares[i] == -1) {
+				if (activeArray[edges[i]] == 1) {
+					pieceSquares[i] = edges[i];
+				}
 			}
 		}
 
@@ -432,11 +461,9 @@ int Board::checkCheck(bool isWhiteTurn) {
 				//If the piece is a white rook or queen
 				if (strcmp(getPiece(pieceSquares[i]), u8"\u2656") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0) {
 					blackInCheck = 1;
-					// std::cout << "6\n";
 				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"♔") == 0) {	//If the piece is a white king and within 1 square of the black king
 					whiteInCheck = 1;
 					blackInCheck = 1;
-					// std::cout << "7\n";
 				}
 			}
 		}
@@ -489,21 +516,23 @@ int Board::checkCheck(bool isWhiteTurn) {
 		//Find if pieces are on squares
 		for (int i = 0; i < 4; i++) {
 			pieceSquares[i] = pieceArray[kingSquare]->checkDiagonal(edges[i], activeArray);
-			if (pieceSquares[i] >= 100) {
-				pieceSquares[i] -= 100;
+			//checkDiagonal ignores the final square, so if it doesn't find anything, edges[i] is checked as well
+			if (pieceSquares[i] == -1) {
+				if (activeArray[edges[i]] == 1) {
+					pieceSquares[i] = edges[i];
+				}
 			}
 		}
+
 		//Check squares
 		for (int i = 0; i < 4; i++) {
 			if (pieceSquares[i] != -1) {
 				//If the piece is a white bishop, queen or a pawn that is below black king on board
 				if (strcmp(getPiece(pieceSquares[i]), u8"\u2657") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u2659") == 0 && row(pieceSquares[i]) < kingRow)) {
 					blackInCheck = 1;
-					// std::cout << "8\n";
 				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"♔") == 0) {	//If the piece is a white king and within 1 square of the black king
 					whiteInCheck = 1;
 					blackInCheck = 1;
-					// std::cout << "9\n";
 				}
 			}
 		}
@@ -523,7 +552,6 @@ int Board::checkCheck(bool isWhiteTurn) {
 					//If the piece is a white knight and the within a radius of 2 squares from the king
 					if (strcmp(getPiece(knightSquares[i]), u8"\u2658") == 0 && (abs(kingRow - row(knightSquares[i])) <= 2 && abs(kingCol - col(knightSquares[i])) <= 2)) {
 						blackInCheck = 1;
-						// std::cout << "10\n";
 					}
 				}
 			}
@@ -622,9 +650,27 @@ int Board::getMovesSince(){
   return movesSince;
 }
 
+Piece** Board::getPieceArray(){
+	return pieceArray;
+}
+
+bool* Board::getActiveArray(){
+	return activeArray;
+}
+
+std::vector<char> Board::getPastPieces(){
+	return pastPieces;
+}
+
+std::vector<int> Board::getPastMoves(){
+	return pastMoves;
+}
+
 //Destructor has no specific behaviour
 Board::~Board(){
- for (int i = 0; i < 64; i++) {
-     delete pieceArray[i];
- }
+	for (int i = 0; i < 64; i++) {
+		if (activeArray[i]) {
+			delete pieceArray[i];
+		}
+ 	}
 }

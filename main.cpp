@@ -170,17 +170,36 @@ int main(int argc, char const *argv[]) {
           break;
         }
       } else { //If no special move is being made, attempt to make normal move
-				success = gameBoard->movePiece(startPos, endPos, whiteTurn);
-				inCheck = gameBoard->checkCheck(whiteTurn);
 
-				if ((whiteTurn && (inCheck == 1 || inCheck == 3)) || (!whiteTurn && (inCheck == 2 || inCheck == 3))) {
-					gameBoard->movePiece(endPos, startPos, whiteTurn);
+				Board* gameBoardCopy = new Board(gameBoard->getPieceArray(), gameBoard->getActiveArray(), gameBoard->getPastPieces(), gameBoard->getPastMoves());
+
+				success = gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
+
+				if (success >= 1) {
+					inCheck = gameBoardCopy->checkCheck();
+				}
+
+				// delete gameBoardCopy;
+
+				if (inCheck == 3) {
+					std::cout << "White and Black are in check. ";
 					success = 0;
+					inCheck = 0;
+				} else if (whiteTurn && inCheck == 1) {
+					std::cout << "White is in check. ";
+					success = 0;
+					inCheck = 0;
+				} else if (!whiteTurn && inCheck == 2) {
+					std::cout << "Black is in check. ";
+					success = 0;
+					inCheck = 0;
+				} else {
+					gameBoard->movePiece(startPos, endPos, whiteTurn);
 				}
       }
 
       if (success != 1){
-        std::cout << "Invalid Move" << '\n';
+        std::cout << "Invalid Move\n";
       }
     }
     whiteTurn= !whiteTurn;

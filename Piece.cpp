@@ -37,7 +37,6 @@ int Piece::direction(int destination){
 }
 
 //Iterates along the direction to be moved, if a piece is found, the square is returned, otherwise returns -1
-//If there is a piece at destination, that square+100 is returned
 int Piece::checkStraight(int destination, bool activeArray[64]) {
 	int dir = direction(destination);
 
@@ -74,18 +73,13 @@ int Piece::checkStraight(int destination, bool activeArray[64]) {
 			break;
 	}
 
-	if (activeArray[destination] == 1) {
-		return destination + 100;
-	}
-
+	//If there are no pieces found
 	return -1;
 }
 
 //Iterates along the direction to be moved, if a piece is found, the square is returned, otherwise returns -1
-//If there is a piece at destination, that square+100 is returned
 int Piece::checkDiagonal(int destination, bool activeArray[64]) {
 	int dir = direction(destination);
-
 	switch (dir) {
 		case 1: //North East
 			for (int ne = location+9; ne < destination; ne+=9) {
@@ -117,10 +111,7 @@ int Piece::checkDiagonal(int destination, bool activeArray[64]) {
 			break;
 	}
 
-	if (activeArray[destination] == 1) {
-		return destination + 100;
-	}
-
+	//If there are no pieces found
 	return -1;
 }
 
