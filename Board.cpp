@@ -84,7 +84,6 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
   }
 
   bool success = pieceArray[startSpace]->move(endSpace, activeArray);
-
   if (success == 1){
     pieceTaken = 0;
     if (spaceWasOccupied == 1){//If a piece is being taken, deletes that piece and resets 50 moves

@@ -171,8 +171,8 @@ int main(int argc, char const *argv[]) {
         }
       } else { //If no special move is being made, attempt to make normal move
 
+				//Creating a copy of gameBoard to check for check on
 				Board* gameBoardCopy = new Board(gameBoard->getPieceArray(), gameBoard->getActiveArray(), gameBoard->getPastPieces(), gameBoard->getPastMoves());
-
 				success = gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
 
 				if (success >= 1) {
