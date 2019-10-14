@@ -61,18 +61,17 @@ int main(int argc, char const *argv[]) {
     }
 
     int success = 0;
+    int startPos;
 
     while (success !=1){
 
       cout << "From: ";
-      switch (longTest) {
+      if (!longTest) {
         //Normal Operation
-        case 0:
-          int startPos = inputFunc();
-          break;
+          startPos = inputFunc();
+        } else {
         //Long Test
-        case 1:
-          int startPos = testMoves[longTestCounter];
+          startPos = testMoves[longTestCounter];
           longTestCounter++;
       }
 
@@ -147,15 +146,14 @@ int main(int argc, char const *argv[]) {
         }
       }
 
+      int endPos;
       cout << "To: ";
-      switch (longTest) {
-        //Normal Operation
-        case 0:
-          int endPos = inputFunc();
-          break;
-        //Long Test
-        case 1:
-          int endPos = testMoves[longTestCounter];
+      if (longTest) {
+          //Normal Operation
+          endPos = inputFunc();
+        } else {
+          //Long Test
+          endPos = testMoves[longTestCounter];
           longTestCounter++;
       }
 
