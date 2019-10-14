@@ -35,9 +35,14 @@ int main(int argc, char const *argv[]) {
 	bool blackCheat = 0;
 
   //Set to 1 to enter test mode.
-  bool longTest = 0;
+  bool longTest = 1;
+  int longTestLength;
+  if (longTest){
+    cout << "How many test moves would you like to make?" << std::endl;
+    cin >> longTestLength;
+  }
   int longTestCounter = 0;
-  int testMoves[1000] = {33, 35, 38, 36, 48, 42, 55, 45, 8, 18, 15, 20, 15, 21, 40,
+  int testMoves[156] = {33, 35, 38, 36, 48, 42, 55, 45, 8, 18, 15, 20, 15, 21, 40,
     19, 30, 29, 25, 26, 47, 29, 47, 38, 16, 34, 69, 55, 24,
     25, 6, 5, 69, 16, 14, 12, 19, 18, 19, 10, 7, 14, 7, 15, 57, 58, 5, 3, 5, 4, 1, 2, 4, 3, 10, 1, 23, 37, 1, 37, 46, 37,
     24, 48, 30, 28, 29, 28, 35, 28, 37, 28, 49, 51,
@@ -71,7 +76,7 @@ int main(int argc, char const *argv[]) {
 
     while (success !=1){
       cout << "From: ";
-      if (!longTest) {
+      if (!longTest || longTestCounter >= (longTestLength-1)) {
         //Normal Operation
           startPos = inputFunc();
         } else {
@@ -152,7 +157,7 @@ int main(int argc, char const *argv[]) {
       }
 
       cout << "To: ";
-      if (!longTest) {
+      if (!longTest || longTestCounter >= longTestLength) {
           //Normal Operation
           endPos = inputFunc();
         } else {
