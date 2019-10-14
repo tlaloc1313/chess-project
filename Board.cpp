@@ -64,7 +64,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
   }
 
   //It is illegal and illogical to take your own pieces:
-  if ((activeArray[endSpace]==1)) {
+  if ((activeArray[endSpace])) {
     if ((pieceArray[endSpace]->getIsWhite() == pieceArray[startSpace]->getIsWhite())){
       return -1;
     }
@@ -96,7 +96,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     pieceArray[endSpace] = pieceArray[startSpace]; //Copies the pointer to the piece within the array
 
     //PROMOTING A PAWN
-    if (pieceArray[endSpace]->getType()=='p'&& (row(endSpace)==7 || row(endSpace)==0)){
+    if (pieceArray[endSpace]->getType()=='p' && (row(endSpace)==7 || row(endSpace)==0)){
       bool pawnWasWhite = pieceArray[endSpace]->getIsWhite();
       delete pieceArray[endSpace];
       char promotePiece;

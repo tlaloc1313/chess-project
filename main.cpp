@@ -196,17 +196,18 @@ int main(int argc, char const *argv[]) {
         }
       } else { //If no special move is being made, attempt to make normal move
 
-				Board* gameBoardCopy = new Board(gameBoard->getPieceArray(), gameBoard->getActiveArray(), gameBoard->getPastPieces(), gameBoard->getPastMoves());
+				Board gameBoardCopy(gameBoard->getPieceArray(), gameBoard->getActiveArray(), gameBoard->getPastPieces(), gameBoard->getPastMoves());
 
 
-				success = gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
+				success = gameBoardCopy.movePiece(startPos, endPos, whiteTurn);
 
 
 				if (success >= 1) {
-					inCheck = gameBoardCopy->checkCheck();
+          std::cout << std::endl;
+					inCheck = gameBoardCopy.checkCheck();
 				}
 
-				// delete gameBoardCopy;
+				//delete gameBoardCopy;
 
 				if (inCheck == 3) {
 					std::cout << "White and Black are in check. ";

@@ -1,4 +1,5 @@
 #include "Pawn.h"
+#include <iostream>
 
 //Constructor
 Pawn::Pawn(int startingSquare, int pieceIsWhite){
@@ -31,8 +32,7 @@ bool Pawn::move(int square, bool activeArray[64]){
       case 1: //Piece is White
 
       //Move up to two squares forward if first move for the piece
-      switch (hasMoved){
-        case 0:
+      if (fromRow == 1){
           if ((toRow-fromRow)==2){
             if (activeArray[square-1]==0){ //Checks that intermediate square is empty
               location = square;
@@ -46,8 +46,7 @@ bool Pawn::move(int square, bool activeArray[64]){
             hasMoved = 1;
             return 1;
           }
-          break;
-        case 1:
+        } else {
           if ( (toRow-fromRow)==1){
             location = square;
             hasMoved = 1;
@@ -58,8 +57,7 @@ bool Pawn::move(int square, bool activeArray[64]){
 
       case 0: //Piece is Black
       //Move up to two if first move for the piece
-      switch (hasMoved){
-        case 0:
+      if (fromRow == 6){
           if ((toRow-fromRow)==-2){
             if (activeArray[square+1]==0){ //Checks that intermediate square is empty
               location = square;
@@ -73,8 +71,7 @@ bool Pawn::move(int square, bool activeArray[64]){
             hasMoved = 1;
             return 1;
           }
-          break;
-        case 1:
+        } else {
           if ( (toRow-fromRow)==-1){
             location = square;
             hasMoved = 1;
@@ -86,14 +83,13 @@ bool Pawn::move(int square, bool activeArray[64]){
 
 //The pawn has unique behaviour only when taking another piece
   if (abs(fromCol-toCol)==1 && activeArray[square]==1){
-    switch (isWhite){
-      case 1:
+    if (isWhite){
       if (toRow-fromRow==1){ //Checks for a diagonal move forwards
         location = square;
         hasMoved = 1;
         return 1;
       }
-      case 0:
+    } else {
       if ( toRow-fromRow==-1 ){ //Checks for a diagonal move backwards
         location = square;
         hasMoved = 1;
