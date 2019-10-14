@@ -3,25 +3,12 @@
 //Uses behaviour of the Board class to setup a standard
 //game of chess on the given gameBoard
 int setup(Board* gameBoard) {
-  //White Pawns
-  gameBoard->addPiece('p', 1, 1);
-  gameBoard->addPiece('p', 9, 1);
-  gameBoard->addPiece('p', 17, 1);
-  gameBoard->addPiece('p', 25, 1);
-  gameBoard->addPiece('p', 33, 1);
-  gameBoard->addPiece('p', 41, 1);
-  gameBoard->addPiece('p', 49, 1);
-  gameBoard->addPiece('p', 57, 1);
 
-  //Black Pawns
-  gameBoard->addPiece('p', 6, 0);
-  gameBoard->addPiece('p', 14, 0);
-  gameBoard->addPiece('p', 22, 0);
-  gameBoard->addPiece('p', 30, 0);
-  gameBoard->addPiece('p', 38, 0);
-  gameBoard->addPiece('p', 46, 0);
-  gameBoard->addPiece('p', 54, 0);
-  gameBoard->addPiece('p', 62, 0);
+  //Pawns
+  for (int i = 1; i<64; i+=8){
+    gameBoard->addPiece('p', i, 1);
+    gameBoard->addPiece('p', i+5 , 0);
+  }
 
   //Rooks
   gameBoard->addPiece('r', 0, 1);
@@ -49,7 +36,6 @@ int setup(Board* gameBoard) {
   gameBoard->addPiece('q', 24, 1);
   gameBoard->addPiece('q', 31, 0);
 
-//Success
 return 0;
 }
 

@@ -10,25 +10,25 @@ extern int row(int location);
 // Superclass
 class Piece {
 protected:
-  char pieceType;
   int location;
+  char pieceType;
   bool isWhite;
   bool hasMoved;
   bool enPassantPossible;
 
 public:
   Piece();
-	int direction(int destination);
-	int checkStraight(int destination, bool activeArray[64]);
-	int checkDiagonal(int destination, bool activeArray[64]);
-	virtual bool checkPath(int destination, bool activeArray[64]);
-  virtual bool move(int square, bool activeArray[64]);
   int getPosition();
   char getType();
   bool getIsWhite();
   bool getHasMoved();
-  virtual void castle(int square);
+	int direction(int destination);
+	int checkStraight(int destination, bool activeArray[64]);
+	int checkDiagonal(int destination, bool activeArray[64]);
   int checkEnPassant();
+  virtual bool checkPath(int destination, bool activeArray[64]);
+  virtual bool move(int square, bool activeArray[64]);
+  virtual void castle(int square);
   virtual ~Piece ();
 };
 
