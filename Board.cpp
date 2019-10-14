@@ -390,7 +390,7 @@ int Board::checkCheck() {
 		for (int i = 0; i < 4; i++) {
 			if (pieceSquares[i] != -1) {
 				//If the piece is a black bishop, queen or a pawn that is above white king on board
-				if (strcmp(getPiece(pieceSquares[i]), u8"\u265D") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u265B") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u265F") == 0 && row(pieceSquares[i]) > kingRow)) {
+				if (strcmp(getPiece(pieceSquares[i]), u8"\u265D") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u265B") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u265F") == 0 && row(pieceSquares[i]) - kingRow == 1)) {
 					whiteInCheck = 1;
 				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"\u265A") == 0) {	//If the piece is a black king and within 1 square of the white king
 					whiteInCheck = 1;
@@ -527,7 +527,7 @@ int Board::checkCheck() {
 		for (int i = 0; i < 4; i++) {
 			if (pieceSquares[i] != -1) {
 				//If the piece is a white bishop, queen or a pawn that is below black king on board
-				if (strcmp(getPiece(pieceSquares[i]), u8"\u2657") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u2659") == 0 && row(pieceSquares[i]) < kingRow)) {
+				if (strcmp(getPiece(pieceSquares[i]), u8"\u2657") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0 || (strcmp(getPiece(pieceSquares[i]), u8"\u2659") == 0 && row(pieceSquares[i]) - kingRow == -1)) {
 					blackInCheck = 1;
 				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"♔") == 0) {	//If the piece is a white king and within 1 square of the black king
 					whiteInCheck = 1;
