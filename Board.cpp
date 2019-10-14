@@ -18,7 +18,7 @@ Board::Board (Piece** pieceArr, bool activeArr[64], std::vector<char> pstPcs, st
 	for (int i = 0; i < 64; i++) {
 		activeArray[i] = 0;
 		if (activeArr[i]) {
-			addPiece(pieceArr[i]->getType(), pieceArr[i]->getPosition(), pieceArr[i]->getIsWhite());
+			addPiece(pieceArr[i]->getType(), i, pieceArr[i]->getIsWhite());
 		}
 	}
 	for (unsigned i = 0; i < pstPcs.size(); i++) {
