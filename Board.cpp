@@ -205,7 +205,7 @@ const char* Board::getPiece(int space){
     }
   }
 
-  return u8"U+FFFD";
+  return u8"\uFFFD";
 }
 
 //This function gets the unicode character from the pastPieces vector to allow move
@@ -623,7 +623,7 @@ int Board::castle (int castleColour, int castleKingSide){
   if (pieceArray[king]->getHasMoved() || pieceArray[rook]->getHasMoved()){
     return 0;
   }
-  //Attempts to castle
+  //Attempts t o castle
   pieceArray[king]->castle(s2);
   pieceArray[rook]->castle(s1);
   activeArray[king] = 0; //Clears the startSpace since the piece is moving

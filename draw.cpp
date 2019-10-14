@@ -28,7 +28,7 @@ void drawMoves(Board* gameBoard){
 
     cout << gameBoard->getPastPiece(i) << gameBoard->getPastSquare(i) << "  ";
   }
-  cout << "\n\n";
+  cout << std::endl << std::endl;
 }
 
 // Draws the game board at its current state, with all pieces. Flips the board
@@ -38,8 +38,8 @@ int draw(Board* gameBoard, bool isWhiteTurn) {
   int currentSquare;
 
   //Clears the screen
-  for (int n=0; n<10; n++){
-    cout<<"\n\n\n\n\n\n\n\n\n\n";
+  for (int n=0; n<100; n++){
+    cout<<std::endl;
   }
 
   //Game board is displayed from White's POV
