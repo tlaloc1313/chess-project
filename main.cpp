@@ -34,6 +34,11 @@ int main(int argc, char const *argv[]) {
 	bool whiteCheat = 0;
 	bool blackCheat = 0;
 
+  //Set to 1 to enter test mode.
+  bool longTest = 0;
+  int longTestCounter = 0;
+  int testMoves[] = {33, 35, 38, 36, 48, 42, 63, 45, 8, 18, 15, 20, 15, 21, 40, 19, 30, 29, 25, 26, 47, 29, 47, 38, 16, 34, 69, 55, 24, 25, 6, 5, 69, 16, 14, 12, 19, 18, 19, 10, 7, 14, 7, 15, 57, 58, 5, 3, 5, 4, 1, 2, 4, 3, 10, 1, 23, 37, 1, 37, 46, 37, 24, 48, 30, 28, 29, 28, 35, 28, 37, 28, 49, 51, 28, 27, 51, 52, 27, 34, 25, 34, 45, 28, 18, 28, 31, 28, 52, 53, 28, 42, 53, 62, 42, 34, 55, 63, 34, 25, 21, 27, 25, 32, 27, 33, 48, 50, 16, 8, 33, 48, 56, 48, 42, 41, 32, 41, 47, 41, 48, 40, 41, 40, 8, 1, 63, 62, 9, 11, 3, 10, 1, 10, 36, 35, 26, 27, 35, 34, 2, 3, 34, 33, 27, 28, 33, 32, 3, 4, 32, 11, 10, 1, 11, 8};
+
 	int inCheck = 0;
 
   while (gameEnd == 0){
@@ -60,7 +65,17 @@ int main(int argc, char const *argv[]) {
     while (success !=1){
 
       cout << "From: ";
-      int startPos = inputFunc();
+      switch (longTest) {
+        //Normal Operation
+        case 0:
+          int startPos = inputFunc();
+          break;
+        //Long Test
+        case 1:
+          int startPos = testMoves[longTestCounter];
+          longTestCounter++;
+      }
+
 
 			//Cheat code - creates a queen of the current player in a random, unoccupied square
 			//There is a 1 in 10 chance to create an opponent's queen
@@ -133,7 +148,17 @@ int main(int argc, char const *argv[]) {
       }
 
       cout << "To: ";
-      int endPos = inputFunc();
+      switch (longTest) {
+        //Normal Operation
+        case 0:
+          int endPos = inputFunc();
+          break;
+        //Long Test
+        case 1:
+          int endPos = testMoves[longTestCounter];
+          longTestCounter++;
+      }
+
 
       //CASTLING
       if (startPos == 69) {
@@ -171,15 +196,15 @@ int main(int argc, char const *argv[]) {
         }
       } else { //If no special move is being made, attempt to make normal move
 
-				//Creating a copy of gameBoard to check for check on
 				Board* gameBoardCopy = new Board(gameBoard->getPieceArray(), gameBoard->getActiveArray(), gameBoard->getPastPieces(), gameBoard->getPastMoves());
+
 				success = gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
 
 				if (success >= 1) {
 					inCheck = gameBoardCopy->checkCheck();
 				}
 
-				delete gameBoardCopy;
+				// delete gameBoardCopy;
 
 				if (inCheck == 3) {
 					std::cout << "White and Black are in check. ";
@@ -204,6 +229,7 @@ int main(int argc, char const *argv[]) {
     }
     whiteTurn= !whiteTurn;
   }
+
 
   delete gameBoard;
   return 0;
