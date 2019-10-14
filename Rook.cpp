@@ -28,13 +28,12 @@ bool Rook::move(int square, bool activeArray[64]){
 }
 
 //Given a destination square, the rook attempts to castle. Returns 0 on success.
-int Rook::castle(int square){
+void Rook::castle(int square){
   if (hasMoved == 0){
     location = square;
     hasMoved = 1;
-    return 0;
   }
-  return -1;
+  return;
 }
 
 //Basic destructor for the Rook subclass.

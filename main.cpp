@@ -35,7 +35,7 @@ int main(int argc, char const *argv[]) {
 	bool blackCheat = 0;
 
   //Set to 1 to enter test mode.
-  bool longTest = 1;
+  bool longTest = 0;
   int longTestCounter = 0;
   int testMoves[1000] = {33, 35, 38, 36, 48, 42, 55, 45, 8, 18, 15, 20, 15, 21, 40,
     19, 30, 29, 25, 26, 47, 29, 47, 38, 16, 34, 69, 55, 24,
@@ -198,9 +198,7 @@ int main(int argc, char const *argv[]) {
 
 				Board gameBoardCopy(gameBoard->getPieceArray(), gameBoard->getActiveArray(), gameBoard->getPastPieces(), gameBoard->getPastMoves());
 
-
 				success = gameBoardCopy.movePiece(startPos, endPos, whiteTurn);
-
 
 				if (success >= 1) {
           std::cout << std::endl;

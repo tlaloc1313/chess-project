@@ -142,8 +142,8 @@ bool Piece::getHasMoved(){
 }
 
 //Normal pieces can't castle
-int Piece::castle(int square){
-	return -1;
+void Piece::castle(int square){
+	return;
 }
 
 //Normal pieces can't be taken en passant

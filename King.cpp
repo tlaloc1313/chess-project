@@ -1,5 +1,4 @@
 #include "King.h"
-#include <iostream>
 
 //Basic constructor for King subclass.
 King::King(int startingSquare, int pieceIsWhite){
@@ -33,13 +32,12 @@ bool King::move(int square, bool activeArray[64]){
 }
 
 //Given a destination square, the king attempts to castle. Returns 0 on success.
-int King::castle(int square){
+void King::castle(int square){
   if (hasMoved == 0){
     location = square;
     hasMoved = 1;
-    return 0;
   }
-  return -1;
+  return;
 }
 
 //Basic destructor for King subclass.

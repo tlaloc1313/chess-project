@@ -423,7 +423,7 @@ int Board::checkCheck() {
 	//BLACK KING
 
 	//Find what square the king is on
-	for (int i = 0; i < 63; i++) {
+	for (int i = 0; i < 64; i++) {
 		if (activeArray[i]) {
 			if (pieceArray[i]->getType() == 'k' && !pieceArray[i]->getIsWhite()) {
 				kingSquare = i;
@@ -567,7 +567,6 @@ int Board::checkCheck() {
   return 0;
 }
 
-
 //Attempts to castle based on the given side and colour. Returns 1 on success.
 int Board::castle (int castleColour, int castleKingSide){
   int rook, king, numSquares, s1, s2, s3;
@@ -623,9 +622,9 @@ int Board::castle (int castleColour, int castleKingSide){
   if (pieceArray[king]->getHasMoved() || pieceArray[rook]->getHasMoved()){
     return 0;
   }
-  //Attempts t o castle
-  pieceArray[king]->castle(s2);
-  pieceArray[rook]->castle(s1);
+  //Attempts to castle
+	pieceArray[king]->castle(s2);
+	pieceArray[rook]->castle(s1);
   activeArray[king] = 0; //Clears the startSpace since the piece is moving
   activeArray[rook] = 0;
   activeArray[s2] = 1; //Marks the endSpace as taken

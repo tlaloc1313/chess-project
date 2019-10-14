@@ -7,7 +7,7 @@ class Rook : public Piece{
 public:
   Rook(int startingSquare, int isWhite);
   bool move(int square, bool activeArray[64]);
-  int castle(int square);
+  void castle(int square);
   ~Rook();
 };
 

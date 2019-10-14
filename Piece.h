@@ -27,7 +27,7 @@ public:
   char getType();
   bool getIsWhite();
   bool getHasMoved();
-  int castle(int square);
+  virtual void castle(int square);
   int checkEnPassant();
   virtual ~Piece ();
 };
