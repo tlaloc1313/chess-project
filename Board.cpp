@@ -332,7 +332,7 @@ int Board::checkCheck() {
 		}
 	}
 
-	if (!whiteInCheck && !blackInCheck) {
+	if (!whiteInCheck) {
 		//Find diagonal destinations - edges now 0-3, anticlockwise starting north-east
 
 		kingRowIncr = kingRow;
@@ -400,7 +400,7 @@ int Board::checkCheck() {
 		}
 	}
 
-	if (!whiteInCheck && !blackInCheck) {
+	if (!whiteInCheck) {
 
 		for (int i = 0; i < 8; i++) {
 			knightSquares[i] += kingSquare;
@@ -435,40 +435,34 @@ int Board::checkCheck() {
 	kingRow = row(kingSquare);
 	kingCol = col(kingSquare);
 
-	if (!whiteInCheck && !blackInCheck) {
+	//Find straight destinations
+	edges[0] = 56 + kingRow;
+	edges[1] = (8 * kingCol) + 7;
+	edges[2] = 0 + kingRow;
+	edges[3] = 8 * kingCol;
 
-		//Find straight destinations
-		edges[0] = 56 + kingRow;
-		edges[1] = (8 * kingCol) + 7;
-		edges[2] = 0 + kingRow;
-		edges[3] = 8 * kingCol;
-
-		//Find if pieces are on squares
-		for (int i = 0; i < 4; i++) {
-			pieceSquares[i] = pieceArray[kingSquare]->checkStraight(edges[i], activeArray);
-			//checkStraight ignores the final square, so if it doesn't find anything, edges[i] is checked as well
-			if (pieceSquares[i] == -1) {
-				if (activeArray[edges[i]] == 1) {
-					pieceSquares[i] = edges[i];
-				}
-			}
-		}
-
-		//Check squares
-		for (int i = 0; i < 4; i++) {
-			if (pieceSquares[i] != -1) {
-				//If the piece is a white rook or queen
-				if (strcmp(getPiece(pieceSquares[i]), u8"\u2656") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0) {
-					blackInCheck = 1;
-				} else if ((abs(kingRow - row(pieceSquares[i])) <= 1 && abs(kingCol - col(pieceSquares[i])) <= 1) && strcmp(getPiece(pieceSquares[i]), u8"♔") == 0) {	//If the piece is a white king and within 1 square of the black king
-					whiteInCheck = 1;
-					blackInCheck = 1;
-				}
+	//Find if pieces are on squares
+	for (int i = 0; i < 4; i++) {
+		pieceSquares[i] = pieceArray[kingSquare]->checkStraight(edges[i], activeArray);
+		//checkStraight ignores the final square, so if it doesn't find anything, edges[i] is checked as well
+		if (pieceSquares[i] == -1) {
+			if (activeArray[edges[i]] == 1) {
+				pieceSquares[i] = edges[i];
 			}
 		}
 	}
 
-	if (!whiteInCheck && !blackInCheck) {
+	//Check squares
+	for (int i = 0; i < 4; i++) {
+		if (pieceSquares[i] != -1) {
+			//If the piece is a white rook or queen
+			if (strcmp(getPiece(pieceSquares[i]), u8"\u2656") == 0 || strcmp(getPiece(pieceSquares[i]), u8"\u2655") == 0) {
+				blackInCheck = 1;
+			}
+		}
+	}
+
+	if (!blackInCheck) {
 
 		//Find diagonal destinations - edges now 0-3, anticlockwise starting north-east
 
@@ -537,7 +531,7 @@ int Board::checkCheck() {
 		}
 	}
 
-	if (!whiteInCheck && !blackInCheck) {
+	if (!blackInCheck) {
 
 		for (int i = 0; i < 8; i++) {
 			knightSquares[i] += kingSquare;

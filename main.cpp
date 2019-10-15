@@ -206,21 +206,17 @@ int main(int argc, char const *argv[]) {
 				success = gameBoardCopy.movePiece(startPos, endPos, whiteTurn);
 
 				if (success >= 1) {
-          std::cout << std::endl;
+          // std::cout << std::endl;
 					inCheck = gameBoardCopy.checkCheck();
 				}
 
 				//delete gameBoardCopy;
 
-				if (inCheck == 3) {
-					std::cout << "White and Black are in check. ";
-					success = 0;
-					inCheck = 0;
-				} else if (whiteTurn && inCheck == 1) {
+				if (whiteTurn && (inCheck == 1 || inCheck == 3)) {
 					std::cout << "White is in check. ";
 					success = 0;
 					inCheck = 0;
-				} else if (!whiteTurn && inCheck == 2) {
+				} else if (!whiteTurn && (inCheck == 2 || inCheck == 3)) {
 					std::cout << "Black is in check. ";
 					success = 0;
 					inCheck = 0;

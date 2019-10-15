@@ -10,8 +10,8 @@ extern int row(int location);
 // Superclass
 class Piece {
 protected:
+	char pieceType;
   int location;
-  char pieceType;
   bool isWhite;
   bool hasMoved;
   bool enPassantPossible;
