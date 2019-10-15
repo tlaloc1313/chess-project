@@ -99,23 +99,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
     if (pieceArray[endSpace]->getType()=='p' && (row(endSpace)==7 || row(endSpace)==0)){
       bool pawnWasWhite = pieceArray[endSpace]->getIsWhite();
       delete pieceArray[endSpace];
-      char promotePiece;
-      std::cout << "Please enter a letter corresponding to the piece you would like to promote to (q, r, n, b):" << '\n';
-      std::cin >> promotePiece;
-      switch (promotePiece){
-        case 'b':
-          pieceArray[endSpace] = new Bishop(endSpace, pawnWasWhite);
-          break;
-        case 'n':
-          pieceArray[endSpace] = new Knight(endSpace, pawnWasWhite);
-          break;
-        case 'q':
-          pieceArray[endSpace] = new Queen(endSpace, pawnWasWhite);
-          break;
-        case 'r':
-          pieceArray[endSpace] = new Rook(endSpace, pawnWasWhite);
-          break;
-      }
+      pieceArray[endSpace] = new Queen(endSpace, pawnWasWhite);
       movesSince = -1;
     }
 

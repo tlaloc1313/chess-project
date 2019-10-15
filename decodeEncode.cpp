@@ -19,8 +19,7 @@ int inputFunc(void) {
 	bool invInput = true;
 
 	//Loops until a valid input is entered
-	while (invInput) {
-		cin >> input;
+	while (invInput && getline(cin, input)) {
 
 		//Tilde signifies that a cheat code is following
 		if (input[0] == '~') {
