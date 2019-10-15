@@ -1,12 +1,12 @@
 #include "Piece.h"
 
-//Basic piece constructor allows for creation of empty Piece objects.
+// Basic piece constructor allows for creation of empty Piece objects.
 Piece::Piece(){
 	pieceType = '?';
 	enPassantPossible = 0;
 }
 
-//Returns the direction the piece will move in from 0-7, anticlockwise from east
+// Returns the direction the piece will move in from 0-7, anticlockwise from east
 int Piece::direction(int destination){
 	int dir;
 
@@ -36,38 +36,39 @@ int Piece::direction(int destination){
 	return dir;
 }
 
-//Iterates along the direction to be moved, if a piece is found, the square is returned, otherwise returns -1
+// Iterates along the direction to be moved, if a piece is found, the square is
+// returned, otherwise returns -1
 int Piece::checkStraight(int destination, bool activeArray[64]) {
 	int dir = direction(destination);
 
-	int e,n,w,s;
+	int east, north, west, south;
 
 	switch (dir) {
 		case 0: //East
-			for (e = location+8; e < destination; e+=8) {
-				if (activeArray[e] == 1) {
-					return e;
+			for (east = location+8; east < destination; east+=8) {
+				if (activeArray[east] == 1) {
+					return east;
 				}
 			}
 			break;
 		case 2: //North
-			for (n = location+1; n < destination; n++) {
-				if (activeArray[n] == 1) {
-					return n;
+			for (north = location+1; north < destination; north++) {
+				if (activeArray[north] == 1) {
+					return north;
 				}
 			}
 			break;
 		case 4: //West
-			for (w = location-8; w > destination; w-=8) {
-				if (activeArray[w] == 1) {
-					return w;
+			for (west = location-8; west > destination; west-=8) {
+				if (activeArray[west] == 1) {
+					return west;
 				}
 			}
 			break;
 		case 6: //South
-			for (s = location-1; s > destination; s--) {
-				if (activeArray[s] == 1) {
-					return s;
+			for (south = location-1; south > destination; south--) {
+				if (activeArray[south] == 1) {
+					return south;
 				}
 			}
 			break;
@@ -77,7 +78,8 @@ int Piece::checkStraight(int destination, bool activeArray[64]) {
 	return -1;
 }
 
-//Iterates along the direction to be moved, if a piece is found, the square is returned, otherwise returns -1
+// Iterates along the direction to be moved, if a piece is found, the square is
+// returned, otherwise returns -1
 int Piece::checkDiagonal(int destination, bool activeArray[64]) {
 	int dir = direction(destination);
 	switch (dir) {
@@ -141,7 +143,7 @@ bool Piece::getHasMoved(){
 	return hasMoved;
 }
 
-//Normal pieces can't castle
+//Normal pieces don't castle
 void Piece::castle(int square){
 	return;
 }
