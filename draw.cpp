@@ -22,7 +22,7 @@ void drawMoves(Board* gameBoard){
 
   //Loops from start to current point in game.
   for (int i = 0; i < gameBoard->getMoveNumber(); i++){
-    if (i%2 == 0){
+    if (i%2 == 0) {
       cout << (i/2)+1 << ". ";
     }
 
@@ -34,32 +34,32 @@ void drawMoves(Board* gameBoard){
 // Draws the game board at its current state, with all pieces. Flips the board
 // when it is black's turn to move.
 int draw(Board* gameBoard, bool isWhiteTurn) {
-  //Initialising variables
+
   int currentSquare;
 
   //Clears the screen
-  for (int n=0; n<100; n++){
+  for (int n=0; n<100; n++) {
     cout<<std::endl;
   }
 
   //Game board is displayed from White's POV
-  if (isWhiteTurn == 1){
+  if (isWhiteTurn == 1) {
 
     //Iterating through rows
-    for (int row=7; row>=0; row--){
+    for (int row=7; row>=0; row--) {
 
       //Row numbering is displayed alongside the board
       cout<<row+1<<SPACINGH;
 
       //Iterating through columns
-      for (int column=0; column<8; column++){
+      for (int column=0; column<8; column++) {
         currentSquare = (column*8) + row;
 
         //Where the square is occupied, print that piece
-        if (gameBoard->spaceOccupied(currentSquare) == 1){
+        if (gameBoard->spaceOccupied(currentSquare) == 1) {
           cout<<gameBoard->getPiece(currentSquare)<<SPACINGH;
         } else { //Where the square is unoccupied, print either a black or white square
-          if ((column+row)%2 == 0){
+          if ((column+row)%2 == 0) {
             cout<<u8"\u25A0"<<SPACINGH;
           } else {
             cout<<u8"\u25A1"<<SPACINGH;

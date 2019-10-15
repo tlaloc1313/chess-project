@@ -8,8 +8,36 @@ using std::string;
 
 #include "Board.h"
 
+int setupchecktest(Board* gameBoard) {
+  //White Pawns
+  // gameBoard->addPiece('p', 12, 1);
+
+  //Black Pawns
+  // gameBoard->addPiece('p', 27, 0);
+
+  //Rooks
+  // gameBoard->addPiece('r', 0, 1);
+  // gameBoard->addPiece('r', 0, 0);
+
+  //Bishops
+  // gameBoard->addPiece('b', 16, 1);
+  // gameBoard->addPiece('b', 16, 0);
+
+  //Knights - note 'n' as type
+  // gameBoard->addPiece('n', 8, 1);
+  // gameBoard->addPiece('n', 44, 0);
+
+  //Kings - note 'k' as type
+  gameBoard->addPiece('k', 55, 1);
+  gameBoard->addPiece('k', 18, 0);
+
+  //Queens
+  gameBoard->addPiece('q', 24, 1);
+  gameBoard->addPiece('q', 6, 0);
+return 0;
+}
+
 extern int setup(Board* gameBoard);
-extern int setupchecktest(Board* gameBoard);
 extern int inputFunc();
 extern int draw(Board* gameBoard, bool isWhiteTurn);
 extern int check(Board* board, bool isWhiteTurn);

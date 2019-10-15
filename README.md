@@ -15,4 +15,5 @@ Chess++ is a simple chess interface, designed to allow two players to have a gam
     - En Passant
     - Ability to resign or offer a draw
     - 50 move rule for a draw
+    - Promotion of pawns
   - A display of past moves, using chess notation. (DONE)

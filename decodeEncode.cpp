@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 
+//Defining error message
 #ifndef INVSQUARE
 #define INVSQUARE "Invalid square, try again:\n"
 #endif
@@ -32,16 +33,16 @@ int inputFunc(void) {
 		}
 
     //Checks for either of the  castling sequences
-    if ( (input.compare("O-O-O") == 0) || (input.compare("O-O") == 0)){
+    if ( (input.compare("O-O-O") == 0) || (input.compare("O-O") == 0)) {
       return 69;
     }
 
     //Checks for resignation
-    if ( (input.compare("resign") == 0) || (input.compare("Resign")) == 0 || (input.compare("RESIGN")) == 0 ){
+    if ( (input.compare("resign") == 0) || (input.compare("Resign")) == 0 || (input.compare("RESIGN")) == 0 ) {
       return 800;
     }
 
-    if ( (input.compare("offerdraw") == 0) || (input.compare("Offerdraw")) == 0 || (input.compare("OfferDraw")) == 0 || (input.compare("OFFERDRAW")) == 0 ){
+    if ( (input.compare("offerdraw") == 0) || (input.compare("Offerdraw")) == 0 || (input.compare("OfferDraw")) == 0 || (input.compare("OFFERDRAW")) == 0 ) {
       return 801;
     }
 
@@ -144,15 +145,15 @@ string encode(int code){
   string takeString = "";
 
   //Special Case: CASTLING
-  if (code == 69){
+  if (code == 69) {
     return "O-O";
   }
-  if (code == 70){
+  if (code == 70) {
     return "O-O-O";
   }
 
   //If the move took a piece
-  if (code>199 && code <264){
+  if (code>199 && code <264) {
     takeString = "x";
     code -= 200;
   }
@@ -163,7 +164,7 @@ string encode(int code){
   string columnString;
 
   //Assigns a letter based on the row
-  switch (column){
+  switch (column) {
     case 0:
       columnString = "a";
     break;

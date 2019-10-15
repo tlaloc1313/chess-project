@@ -3,7 +3,7 @@
 
 #include "Piece.h"
 
-class Queen : public Piece{
+class Queen : public Piece {
 public:
   Queen(int startingSquare, int isWhite);
 	bool checkPath(int destination, bool activeArray[64]);

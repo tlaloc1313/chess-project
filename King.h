@@ -3,13 +3,12 @@
 
 #include "Piece.h"
 
-class King : public Piece{
+class King : public Piece {
 public:
   King(int startingSquare, int isWhite);
   bool move(int square, bool activeArray[64]);
   void castle(int square);
   ~King();
 };
-
 
 #endif

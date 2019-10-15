@@ -7,7 +7,8 @@ using std::abs;
 extern int col(int location);
 extern int row(int location);
 
-// Superclass
+// Superclass of all pieces.
+// This is intended to be initialised only as a placeholder.
 class Piece {
 protected:
 	char pieceType;

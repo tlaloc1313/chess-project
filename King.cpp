@@ -17,12 +17,12 @@ bool King::move(int square, bool activeArray[64]){
   int toRow = row(square);
   int toCol = col(square);
 
-  //Same square check
+  // Same square check
   if (square==location){
     return 0;
   }
 
-  //King can move 1 square in any direction
+  // The king can move 1 square in any direction
   if ( abs(fromRow-toRow)<2 && abs(fromCol-toCol)<2 ){
     location = square;
     hasMoved = 1;
@@ -31,7 +31,7 @@ bool King::move(int square, bool activeArray[64]){
   return 0;
 }
 
-//Given a destination square, the king attempts to castle. Returns 0 on success.
+// Given a destination square, the king is forced to castle.
 void King::castle(int square){
   if (hasMoved == 0){
     location = square;
@@ -40,6 +40,6 @@ void King::castle(int square){
   return;
 }
 
-//Basic destructor for King subclass.
+// Basic destructor for King subclass.
 King::~King(){
 }

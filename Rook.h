@@ -3,7 +3,7 @@
 
 #include "Piece.h"
 
-class Rook : public Piece{
+class Rook : public Piece {
 public:
   Rook(int startingSquare, int isWhite);
   bool move(int square, bool activeArray[64]);
