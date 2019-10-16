@@ -27,12 +27,6 @@ Board::Board (Piece** pieceArr, bool activeArr[64], std::vector<char> pstPcs, st
 	for (unsigned i = 0; i < pstMvs.size(); i++) {
 		pastMoves.push_back(pstMvs.at(i));
 	}
-	// for (std::vector<char> it = pstPcs.begin(); it != pstPcs.end(); it++) {
-	// 	pastPieces.push_back(*it);
-	// }
-	// for (std::vector<int> it = pstMvs.begin(); it != pstMvs.end(); it++) {
-	// 	pastMoves.push_back(*it);
-	// }
 	moveNumber = 0;
   movesSince = 0;
 }
@@ -52,17 +46,14 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
   if (startSpace > 63){
     return -1;
   }
-
   //Check that a piece exists at StartSpace
   if (activeArray[startSpace] == 0){
     return -2;
   }
-
   //Allows white to only move white pieces, and black to only move black pieces.
   if (whiteTurn != pieceArray[startSpace]->getIsWhite()){
     return -2;
   }
-
   //It is illegal and illogical to take your own pieces:
   if ((activeArray[endSpace])) {
     if ((pieceArray[endSpace]->getIsWhite() == pieceArray[startSpace]->getIsWhite())){
@@ -128,7 +119,7 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
 
 //Adds a piece to the board, given the necessary attributes. Returns -1 on failure.
 int Board::addPiece(char type, int startSpace, int isWhite){
-  if (activeArray[startSpace] == 1){ //If the space is taken
+  if (activeArray[startSpace] == 1) { //If the space is taken
     return -1;
   }
   activeArray[startSpace] = 1; //Activates the space before placing the piece
@@ -152,7 +143,6 @@ int Board::addPiece(char type, int startSpace, int isWhite){
       pieceArray[startSpace] = new Rook(startSpace, isWhite);
       break;
   }
-
   return 0;
 }
 
@@ -161,7 +151,7 @@ const char* Board::getPiece(int space){
   char type = pieceArray[space]->getType();
   bool isWhite = pieceArray[space]->getIsWhite();
 
-  if (isWhite == 1){
+  if (isWhite == 1) {
     //White Pieces
     switch (type) {
       case 'p':
@@ -200,17 +190,17 @@ const char* Board::getPiece(int space){
 
 //This function gets the unicode character from the pastPieces vector to allow move
 //history to be printed.
-const char* Board::getPastPiece(int number){
+const char* Board::getPastPiece(int number) {
 
   //Special Cases
-  if (pastPieces[number] == 'x'){
+  if (pastPieces[number] == 'x') {
     return u8"\u200A";
   }
 
 
   int isWhite = ((number + 1) % 2);
 
-  if (isWhite == 1){
+  if (isWhite == 1) {
     //White Pieces
     switch (pastPieces[number]) {
       case 'p':
@@ -395,7 +385,6 @@ int Board::checkCheck(int inputWhite, int inputBlack) {
 	}
 
 	if (!whiteInCheck) {
-
 		for (int i = 0; i < 8; i++) {
 			knightSquares[i] += kingSquare;
 		}
@@ -413,9 +402,7 @@ int Board::checkCheck(int inputWhite, int inputBlack) {
 			}
 		}
 	}
-
 	//BLACK KING
-
 	//Find what square the king is on, if it isn't passed
   if (inputBlack == -1) {
     for (int i = 0; i < 64; i++) {
@@ -461,9 +448,7 @@ int Board::checkCheck(int inputWhite, int inputBlack) {
 	}
 
 	if (!blackInCheck) {
-
 		//Find diagonal destinations - edges now 0-3, anticlockwise starting north-east
-
 		kingRowIncr = kingRow;
 		kingColIncr = kingCol;
 

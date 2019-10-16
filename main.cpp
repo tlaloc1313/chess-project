@@ -64,7 +64,6 @@ int main(int argc, char const *argv[]) {
           return 0;
         }
 
-
 			//Cheat code - creates a queen of the current player in a random, unoccupied square
 			//There is a 1 in 10 chance to create an opponent's queen
 			if (startPos == 1000) {
@@ -199,9 +198,7 @@ int main(int argc, char const *argv[]) {
 				}
       }
 
-      // This section ensures that the user is aware of the exact reason for the
-      // invalidity of their move by providing them with detailed messages as
-      // decided by a switch statement.
+      // This section provides specific error messages in some cases.
       switch (success) {
         case 0:
         cout << "Invalid Move\n";
@@ -216,8 +213,6 @@ int main(int argc, char const *argv[]) {
     }
     whiteTurn= !whiteTurn;
   }
-
-
   delete gameBoard;
   return 0;
 }
