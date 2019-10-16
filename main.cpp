@@ -181,7 +181,7 @@ int main(int argc, char const *argv[]) {
 
 				if (success >= 1) {
           // std::cout << std::endl;
-					inCheck = gameBoardCopy->checkCheck();
+					inCheck = gameBoardCopy->checkCheck(-1, -1);
 				}
 
 				delete gameBoardCopy;

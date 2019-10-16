@@ -25,7 +25,7 @@ public:
   const char* getPastPiece(int number);
   std::string getPastSquare(int number);
   int getMoveNumber();
-	int checkCheck();
+	int checkCheck(int inputWhite, int inputBlack);
   int castle(int castleColour, int castleKingSide);
   int getMovesSince();
 	Piece** getPieceArray();

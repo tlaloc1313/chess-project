@@ -253,7 +253,7 @@ int Board::getMoveNumber(){
 }
 
 //Returns 0 if no check, 1 if white, 2 if black and 3 if both
-int Board::checkCheck() {
+int Board::checkCheck(int inputWhite, int inputBlack) {
 
 	//Declaring variables
 	bool whiteInCheck = 0;
@@ -273,15 +273,19 @@ int Board::checkCheck() {
 
 	//WHITE KING
 
-	//Find what square the king is on
-	for (int i = 0; i < 64; i++) {
-		if (activeArray[i]) {
-			if (pieceArray[i]->getType() == 'k' && pieceArray[i]->getIsWhite()) {
-				kingSquare = i;
-				break;
-			}
-		}
-	}
+	//Find what square the king is on, if it isn't passed
+  if (inputWhite == -1) {
+    for (int i = 0; i < 64; i++) {
+  		if (activeArray[i]) {
+  			if (pieceArray[i]->getType() == 'k' && pieceArray[i]->getIsWhite()) {
+  				kingSquare = i;
+  				break;
+  			}
+  		}
+  	}
+  } else {
+    kingSquare = inputWhite;
+  }
 
 	//Find straight destinations
 	kingRow = row(kingSquare);
@@ -406,15 +410,19 @@ int Board::checkCheck() {
 
 	//BLACK KING
 
-	//Find what square the king is on
-	for (int i = 0; i < 64; i++) {
-		if (activeArray[i]) {
-			if (pieceArray[i]->getType() == 'k' && !pieceArray[i]->getIsWhite()) {
-				kingSquare = i;
-				break;
-			}
-		}
-	}
+	//Find what square the king is on, if it isn't passed
+  if (inputBlack == -1) {
+    for (int i = 0; i < 64; i++) {
+  		if (activeArray[i]) {
+  			if (pieceArray[i]->getType() == 'k' && !pieceArray[i]->getIsWhite()) {
+  				kingSquare = i;
+  				break;
+  			}
+  		}
+  	}
+  } else {
+    kingSquare = inputBlack;
+  }
 
 	kingRow = row(kingSquare);
 	kingCol = col(kingSquare);
@@ -547,8 +555,8 @@ int Board::checkCheck() {
 
 //Attempts to castle based on the given side and colour. Returns 1 on success.
 int Board::castle (int castleColour, int castleKingSide){
-  int rook, king, numSquares, s1, s2, s3;
-  //Sets up the correct squares to check
+  int rook, king, numSquares, s1, s2, s3, checkTest[3];
+  //Sets up the correct squares to check, and checksChecks
   if (castleColour){
       king = 32;
     if (castleKingSide){// White kingside
@@ -599,6 +607,26 @@ int Board::castle (int castleColour, int castleKingSide){
   //If pieces have moved, casling fails
   if (pieceArray[king]->getHasMoved() || pieceArray[rook]->getHasMoved()){
     return 0;
+  }
+  //Checks that the king isn't moving into, through, or out of check.
+  if (castleColour) {
+    checkTest[0] = checkCheck(king, -1);
+    checkTest[1] = checkCheck(s1, -1);
+    checkTest[2] = checkCheck(s2, -1);
+    for (int i = 0; i < 3; i++) {
+      if ((checkTest[i] == 1) || (checkTest[i] == 3)) {
+        return 0;
+      }
+    }
+  } else {
+    checkTest[0] = checkCheck(-1, king);
+    checkTest[1] = checkCheck(-1, s1);
+    checkTest[2] = checkCheck(-1, s2);
+    for (int i = 0; i < 3; i++) {
+      if ((checkTest[i] == 2) || (checkTest[i] == 3)) {
+        return 0;
+      }
+    }
   }
   //Attempts to castle
 	pieceArray[king]->castle(s2);
