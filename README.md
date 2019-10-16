@@ -5,9 +5,9 @@ Developed by:
   Lachlan Wood
   James Edwards
 
-Chess++ is a simple chess interface, designed to allow two players to have a game of chess against each other. It aims to provide:
-  - Command-line move entry based on starting and ending square. (DONE)
-  - A live display of the chess board. (DONE)
+Chess++ is a simple chess interface, designed to allow two players to have a game of chess against each other. It provides:
+  - Command-line move entry based on starting and ending square.
+  - A live display of the chess board.
   - Move validation based on all rules of Chess, including:
     - Correct piece movement
     - Castling
@@ -16,4 +16,4 @@ Chess++ is a simple chess interface, designed to allow two players to have a gam
     - Ability to resign or offer a draw
     - 50 move rule for a draw
     - Promotion of pawns
-  - A display of past moves, using chess notation. (DONE)
+  - A display of past moves, using chess notation.
