@@ -73,13 +73,19 @@ int Board::movePiece(int startSpace, int endSpace, int whiteTurn){
   int spaceWasOccupied = activeArray[endSpace]; //Checks the endSpace
 
   //Checking for the en passant rule:
-  if ( (pieceArray[startSpace]->getType() == 'p') && (col(endSpace) != col(startSpace)) && (activeArray[endSpace] == 0) && (activeArray[endSpace+1-(2*whiteTurn)]) ){
-    if (pieceArray[endSpace]->checkEnPassant()){
+  if ( (pieceArray[startSpace]->getType() == 'p')
+      && (col(endSpace) != col(startSpace))
+      && (activeArray[endSpace] == 0)
+      && (activeArray[endSpace+1-(2*whiteTurn)]) ){
+    if (pieceArray[endSpace+1-(2*whiteTurn)]->checkEnPassant()
+      && (pieceArray[endSpace+1-(2*whiteTurn)]->getIsWhite() != whiteTurn)){
       //Pushes the pawn back to be taken, and continues as usual
       activeArray[endSpace] = 1;
       pieceArray[endSpace] = pieceArray[endSpace+1-(2*whiteTurn)];
       activeArray[endSpace+1-(2*whiteTurn)] = 0;
       spaceWasOccupied = 1;
+    } else {
+      return 0;
     }
   }
 
