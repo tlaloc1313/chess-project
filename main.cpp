@@ -11,10 +11,10 @@ using std::string;
 extern int setup(Board* gameBoard);
 extern int inputFunc();
 extern int draw(Board* gameBoard, bool isWhiteTurn);
-// extern int checkCheck(Board* board, bool isWhiteTurn);
 
 int main(int argc, char const *argv[]) {
 
+  //Clear screen
   for (int i = 0; i < 10; i++) {
     cout<<"\n\n\n\n\n\n\n\n\n\n";
   }
@@ -37,10 +37,10 @@ int main(int argc, char const *argv[]) {
   int inCheck = 0;
   int success, startPos, endPos;
 
-  while (gameEnd == 0){
+  while (gameEnd == 0) {
 
     //50 Move Rules
-    if (gameBoard->getMovesSince()>100){
+    if (gameBoard->getMovesSince()>100) {
       cout << "50 Move Rule - Game is Drawn\n";
       gameEnd = 3;
       break;
@@ -48,16 +48,15 @@ int main(int argc, char const *argv[]) {
 
     draw(gameBoard, whiteTurn);
     //Display whose turn it is
-    if (whiteTurn){
+    if (whiteTurn) {
       cout << "White to move:"<< std::endl;
-    }
-    else{
-
+    } else {
       cout<<"Black to move:" << std::endl;
     }
 
+    //Assume move is unsuccessful
     success = 0;
-
+    //Keep asking for moves until successful
     while (success !=1){
       cout << "From: ";
         startPos = inputFunc();
@@ -76,7 +75,8 @@ int main(int argc, char const *argv[]) {
 					std::uniform_int_distribution<int> failDist(0,9);	//Uniform int distribution from 0-9
 					bool free = 0;
 					while (!free) {
-						int randNum = sqrDist(generator);	//Generates the number
+            //Generates a number and checks that the square is free
+						int randNum = sqrDist(generator);
 						if (gameBoard->spaceOccupied(randNum) == 0) {
 							free = 1;
 							if (failDist(generator) == 0) {
@@ -175,15 +175,15 @@ int main(int argc, char const *argv[]) {
         }
       } else { //If no special move is being made, attempt to make normal move
 
+        //Section checks if the move results in the player being in check.
+        //Creates a copy of the board
 				Board* gameBoardCopy = new Board(gameBoard->getPieceArray(), gameBoard->getActiveArray(), gameBoard->getPastPieces(), gameBoard->getPastMoves());
-
-				success = gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
-
+        //Makes the move on the copied board
+      	success = gameBoardCopy->movePiece(startPos, endPos, whiteTurn);
+        //Checks that the piece isn't in check after moving then deletes copy.
 				if (success >= 1) {
-          // std::cout << std::endl;
 					inCheck = gameBoardCopy->checkCheck(-1, -1);
 				}
-
 				delete gameBoardCopy;
 
 				if (whiteTurn && (inCheck == 1 || inCheck == 3)) {
@@ -198,6 +198,10 @@ int main(int argc, char const *argv[]) {
 					gameBoard->movePiece(startPos, endPos, whiteTurn);
 				}
       }
+
+      // This section ensures that the user is aware of the exact reason for the
+      // invalidity of their move by providing them with detailed messages as
+      // decided by a switch statement.
       switch (success) {
         case 0:
         cout << "Invalid Move\n";
