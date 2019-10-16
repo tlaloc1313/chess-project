@@ -615,7 +615,7 @@ int Board::castle (int castleColour, int castleKingSide){
     checkTest[2] = checkCheck(s2, -1);
     for (int i = 0; i < 3; i++) {
       if ((checkTest[i] == 1) || (checkTest[i] == 3)) {
-        return 0;
+        return -5;
       }
     }
   } else {
@@ -624,7 +624,7 @@ int Board::castle (int castleColour, int castleKingSide){
     checkTest[2] = checkCheck(-1, s2);
     for (int i = 0; i < 3; i++) {
       if ((checkTest[i] == 2) || (checkTest[i] == 3)) {
-        return 0;
+        return -5;
       }
     }
   }

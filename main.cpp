@@ -139,7 +139,7 @@ int main(int argc, char const *argv[]) {
       cout << "To: ";
       endPos = inputFunc();
 
-      //CASTLING
+      //CASTLING -- Returns -5 if castling through check
       if (startPos == 69) {
         success = 0; //Castling fails by default
 
@@ -198,8 +198,16 @@ int main(int argc, char const *argv[]) {
 					gameBoard->movePiece(startPos, endPos, whiteTurn);
 				}
       }
-      if (success != 1){
-        std::cout << "Invalid Move\n";
+      switch (success) {
+        case 0:
+        cout << "Invalid Move\n";
+        break;
+        case -5:
+        cout << "Invalid Move - Cannot castle through, out of, or into check\n";
+        break;
+        case -4:
+        cout << "Invalid Move - Illegal Castling\n";
+        break;
       }
     }
     whiteTurn= !whiteTurn;
